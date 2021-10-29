@@ -4,14 +4,8 @@ parts:
 - caption: "コンピュータサイエンス第一"
   chapters:
   - file: cs1/index
-    title: "はじめに"
   - file: cs1/day0
-    title: "0. ガイダンス"
   - file: cs1/day1
-    title: "1. 四則演算と繰り返し"
   - file: cs1/day2
-    title: "2. 「データ=数」；コンピュータの中では？"
   - file: cs1/day2_addendum
-    title: "2+. レポート課題の補足（スマイルくんとそのバリエーション）"
   - file: cs1/day3
-    title: "3. プログラミング体験１；配列、for 文、文字列と文字"

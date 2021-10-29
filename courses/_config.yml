@@ -1,12 +1,32 @@
 # https://jupyterbook.org/customize/config.html
 # https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html
 
+# https://github.com/wakita/books
+
 title: "2021年度コンピュータサイエンス第一"
 author: "Ken Wakita"
 logo: cs1/images/cs21.png
 
+execute:
+  execute_notebooks: "off"
+
+html:
+  use_edit_page_button: false
+  use_repository_button: true
+  use_issue_button: true
+  extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+  extra_footer: <div><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 License</a>.</div>
+  home_page_in_navbar: false
+  baseurl: https://wakita.github.io/books
+
 bibtex_bibfiles:
   - /Users/wakita/Dropbox/research/library.bib
 
-execute:
-  execute_notebooks: "off"
+launch_buttons:
+  notebook_interface: jupyterlab
+  binderhub_url: https://mybinder.org
+
+repository:
+  url: https://github.com/wakita/books
+  path_to_book: courses
+  branch: main

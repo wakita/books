@@ -1,0 +1,12 @@
+# https://jupyterbook.org/customize/config.html
+# https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html
+
+title: "2021年度コンピュータサイエンス第一"
+author: "Ken Wakita"
+logo: cs1/images/cs21.png
+
+bibtex_bibfiles:
+  - /Users/wakita/Dropbox/research/library.bib
+
+execute:
+  execute_notebooks: "off"

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+jupyter-book build --path-output /tmp/book $DROPBOX/doc/classes/material/courses

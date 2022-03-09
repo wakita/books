@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第３章: 正規表現 &#8212; 2021年度コンピュータサイエンス第一</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://wakita.github.io/books/nlp100/nlp02.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="第2章: UNIXコマンド" href="nlp01.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cs21.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">2021年度コンピュータサイエンス第一</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption" role="heading">
+ <span class="caption-text">
+  コンピュータサイエンス第一
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/index.html">
+   コンピュータサイエンス第一
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day0.html">
+   Day 0: ガイダンス
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day1.html">
+   Day 1: 四則演算と繰り返し
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day2.html">
+   Day 2: 「データ = 数」はコンピューターのなかでどうなってるの？
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day2_addendum.html">
+   レポート課題1 についての捕捉
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day3.html">
+   Day 3: 配列と文字列１
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  ランナーのためのPython
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/index.html">
+   ランナーのためのPython
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/memo.html">
+   複数行にわたる文字列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/Enjoy%20Simple%20English.html">
+   Enjoy Simple English
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/%E5%9F%BA%E7%A4%8E%E8%8B%B1%E8%AA%9E%E3%83%AC%E3%83%99%E3%83%AB1.html">
+   中学生の基礎英語レベル１
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/%E5%9F%BA%E7%A4%8E%E8%8B%B1%E8%AA%9E%E3%83%AC%E3%83%99%E3%83%AB2.html">
+   中学生の基礎英語レベル２
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/%E7%8F%BE%E4%BB%A3%E8%8B%B1%E8%AA%9E.html">
+   高校生からはじめる「現代英語」
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/Python1%E5%B9%B4%E7%94%9F.html">
+   Python１年生
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  NLP 100本ノック
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   言語処理100本ノック
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp00.html">
+   第1章: 準備運動
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp01.html">
+   第2章: UNIXコマンド
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第３章: 正規表現
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp100/nlp02.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/wakita/books"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/wakita/books/main?urlpath=lab/tree/courses/nlp100/nlp02.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   第３章: 正規表現
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#json">
+   20. JSONデータの読み込み
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   21. カテゴリ名を含む行を抽出
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   22. カテゴリ名の抽出
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   23. セクション構造
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   24. ファイル参照の抽出
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   25. テンプレートの抽出
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   26. 強調マークアップの除去
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   27. 内部リンクの除去
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mediawiki">
+   28. MediaWikiマークアップの除去
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#url">
+   29. 国旗画像のURLを取得する
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>第３章: <a class="reference external" href="https://nlp100.github.io/ja/ch03.html">正規表現</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/drive/12ejBdUYMdvgoBi815E1AZpbrfsUQ9kki?usp=sharing">脇田の回答例</a></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="json">
+<h1>20. JSONデータの読み込み<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h1>
+<p>何度もファイルをダウンロードしないように <code class="docutils literal notranslate"><span class="pre">os.path.exists</span></code> で存在しないことを確認してから、ダウンロードする。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gzip</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">os.path</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;jawiki-country.json.gz&#39;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;wget --quiet https://nlp100.github.io/data/jawiki-country.json.gz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>つぎにダウンロードしたファイルを読み込み、イギリスのデータを取得し、<code class="docutils literal notranslate"><span class="pre">uk_text</span></code> という名前の変数に保存した。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GZip</span></code> で圧縮されたファイルを開くには、<a class="reference external" href="https://docs.python.org/3.10/library/gzip.html#gzip.open"><code class="docutils literal notranslate"><span class="pre">gzip.open</span></code> 関数</a> を使う。使い方は普通の <a class="reference external" href="https://docs.python.org/3.10/library/functions.html#open"><code class="docutils literal notranslate"><span class="pre">open</span></code>関数</a> とほぼ同じ。</p></li>
+<li><p>JSON形式の文字列を読み込むには<a class="reference external" href="https://docs.python.org/3.10/library/json.html#json.loads"><code class="docutils literal notranslate"><span class="pre">json.loads</span></code>関数</a>を使う。ファイルハンドルから読み込むときは <a class="reference external" href="https://docs.python.org/3.10/library/json.html#json.load"><code class="docutils literal notranslate"><span class="pre">json.load</span></code>関数</a>、逆にファイルハンドル (<code class="docutils literal notranslate"><span class="pre">w</span></code>) に書き込むときは<a class="reference external" href="https://docs.python.org/3.10/library/json.html#json.dump"><code class="docutils literal notranslate"><span class="pre">json.dump(w,</span> <span class="pre">json_data)</span></code>関数</a>。JSON 形式の文字列を取得するには <a class="reference external" href="https://docs.python.org/3.10/library/json.html#json.dumps"><code class="docutils literal notranslate"><span class="pre">json.dumps</span></code>関数</a>を使う。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;jawiki-country.json.gz&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">gz</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="n">gz</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">input</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="k">break</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;イギリス&#39;</span><span class="p">:</span>
+            <span class="n">uk_text</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id2">
+<h1>21. カテゴリ名を含む行を抽出<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<p>この章の残りの問題を解くヒントを得るためにデータ形式を解析するために使う関数を定義する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">grep</span><span class="p">(</span><span class="n">pat</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;uk_text の行のうち pat に合致するものを出力する。</span>
+<span class="sd">       Input:</span>
+<span class="sd">         - pat: 正規表現</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">rx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pat</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">uk_text</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rx</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="n">grep</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{{Sisterlinks|commons=United Kingdom|commonscat=United Kingdom|s=Category:イギリス|n=Category:イギリス|voy=United Kingdom}}
+[[Category:イギリス|*]]
+[[Category:イギリス連邦加盟国]]
+[[Category:英連邦王国|*]]
+[[Category:G8加盟国]]
+[[Category:欧州連合加盟国|元]]
+[[Category:海洋国家]]
+[[Category:現存する君主国]]
+[[Category:島国]]
+[[Category:1801年に成立した国家・領域]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id3">
+<h1>22. カテゴリ名の抽出<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<p>ここから本格的な正規表現の練習が始まる。詳しくは <a class="reference external" href="https://docs.python.org/3.10/howto/regex.html">Regular Expression HOWTO</a> を参照のこと。</p>
+<p>よく使う正規表現のメタ記号の使い方は：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">[abcdef]</span></code>: <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> or <code class="docutils literal notranslate"><span class="pre">c</span></code> or <code class="docutils literal notranslate"><span class="pre">d</span></code> or <code class="docutils literal notranslate"><span class="pre">e</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[a-z]</span></code>: <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> or … or <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">z</span></code>。<code class="docutils literal notranslate"><span class="pre">[A-Z]</span></code> や <code class="docutils literal notranslate"><span class="pre">[0-9]</span></code> も同様</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[^abcdef]</span></code>: <code class="docutils literal notranslate"><span class="pre">[a-f]</span></code> に適合しない文字</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[^]abc]</span></code>: <code class="docutils literal notranslate"><span class="pre">]</span></code>, <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code> 以外の文字</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X|Y</span></code>: <code class="docutils literal notranslate"><span class="pre">X</span></code> あるいは <code class="docutils literal notranslate"><span class="pre">Y</span></code> のいずれかの正規表現に適合する文字列</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X*</span></code>: 正規表現<code class="docutils literal notranslate"><span class="pre">X</span></code>に適合する文字列の0個以上を接続したもの</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X+</span></code>: 正規表現<code class="docutils literal notranslate"><span class="pre">X</span></code>に適合する文字列の1個以上を接続したもの</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X(Y)Z</span></code>: 正規表現<code class="docutils literal notranslate"><span class="pre">XYZ</span></code>に適合する文字列。この正規表現の <code class="docutils literal notranslate"><span class="pre">match</span></code> メソッドが利用された場合、括弧に囲われた <code class="docutils literal notranslate"><span class="pre">Y</span></code> に適合する文字列を簡単に取得できる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;-+ ([^-]+) -+&#39;</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">rx</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;---------- This is an important message ---&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">m</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># You see: This is an important message</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>この章の課題は多くは以下のような形式で解けると思う。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;グループ機能を用いた正規表現&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">uk_text</span><span class="p">:</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">rx</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># m[1] は正規表現の1番目のグループに適合した部分文字列</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id4">
+<h1>23. セクション構造<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://www.mediawiki.org/wiki/Help:Formatting#Level_2">MediaWiki のセクション構造</a>は二個以上の <code class="docutils literal notranslate"><span class="pre">==</span></code> でセクションタイトルを挟んで以下のように記述するらしい。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span> <span class="n">Level</span> <span class="mi">2</span> <span class="o">==</span>
+
+<span class="o">===</span> <span class="n">Level</span> <span class="mi">3</span> <span class="o">===</span>
+
+<span class="o">====</span> <span class="n">Level</span> <span class="mi">4</span> <span class="o">====</span>
+
+<span class="o">=====</span> <span class="n">Level</span> <span class="mi">5</span> <span class="o">=====</span>
+
+<span class="o">======</span> <span class="n">Level</span> <span class="mi">6</span> <span class="o">======</span>
+</pre></div>
+</div>
+<p>これを正規表現で記述すればよい。ところで、上の例はタイトルを挟んで左右同数の <code class="docutils literal notranslate"><span class="pre">=</span></code> が出現している。Pumping 補題より、このようなパターンを正規表現で記述することはできないことが知られている。正規表現で記述する以上、同数条件は記述しないでよい。</p>
+<p>脇田の回答では、たくさん出力される項目を <code class="docutils literal notranslate"><span class="pre">IPython.display.Markdown</span></code> を用いて、表形式で出力している。</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id5">
+<h1>24. ファイル参照の抽出<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h1>
+<p>以下を実行して考える。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span><span class="p">(</span><span class="s1">&#39;ファイル&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id6">
+<h1>25. テンプレートの抽出<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h1>
+<p>以下を実行して取り組む。出力をよくよくよく観察すること。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span><span class="p">(</span><span class="s1">&#39;基礎情報&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id7">
+<h1>26. 強調マークアップの除去<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;確立形態4</span> <span class="pre">&quot;:</span> <span class="pre">&quot;現在の国号「'''グレートブリテン及び北アイルランド連合王国'''」に変更&quot;</span></code>が該当するらしい。</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id8">
+<h1>27. 内部リンクの除去<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h1>
+<p>似たようなコードを書くのが面倒になってくるころかと思う。きれいなプログラムを書くには工夫を要する。</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="mediawiki">
+<h1>28. MediaWikiマークアップの除去<a class="headerlink" href="#mediawiki" title="Permalink to this headline">¶</a></h1>
+<p>正規表現についての最後の課題だ。がんばれ！</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="url">
+<h1>29. 国旗画像のURLを取得する<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h1>
+<p>まず、言われたとおりに <a class="reference external" href="https://www.mediawiki.org/wiki/API:Imageinfo">MediaWiki の <code class="docutils literal notranslate"><span class="pre">imageinfo</span></code> API のドキュメント</a>を眺めてみる。よくわからなくても、あきらめずに我慢して読む。</p>
+<p>説明に続いて、API を利用したときに返ってくる JSON データ (<strong>Response</strong>) と Python のサンプルコード (<strong>Sample Code</strong>) が掲載されている。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://en.wikipedia.org/w/api.php&quot;</span>
+
+<span class="n">PARAMS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;prop&quot;</span><span class="p">:</span> <span class="s2">&quot;imageinfo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;titles&quot;</span><span class="p">:</span> <span class="s2">&quot;File:Billy_Tipton.jpg&quot;</span>
+<span class="p">}</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">URL</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">PARAMS</span><span class="p">)</span>
+<span class="n">DATA</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="n">PAGES</span> <span class="o">=</span> <span class="n">DATA</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">][</span><span class="s2">&quot;pages&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">PAGES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; is uploaded by User:&quot;</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;imageinfo&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;user&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Sample code</strong> の <code class="docutils literal notranslate"><span class="pre">PAGES</span></code> 変数に代入されている <code class="docutils literal notranslate"><span class="pre">DATA[&quot;query&quot;][&quot;pages&quot;]</span></code> が、<strong>Response</strong> の構造を反映していることに注目。<code class="docutils literal notranslate"><span class="pre">PAGES</span></code> は <code class="docutils literal notranslate"><span class="pre">batchcomplete</span></code>, <code class="docutils literal notranslate"><span class="pre">query</span></code> 属性を持つJSON 辞書で、<code class="docutils literal notranslate"><span class="pre">query</span></code> 属性の値もまた JSON 辞書。<code class="docutils literal notranslate"><span class="pre">query</span></code> 属性の値の <code class="docutils literal notranslate"><span class="pre">pages</span></code> 属性の値を <code class="docutils literal notranslate"><span class="pre">PAGES</span></code> に代入していることになる。<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k,</span> <span class="pre">v</span> <span class="pre">in</span> <span class="pre">PAGES.items():</span></code> のなかで <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">imageinfo</span></code> などを取得しているが、それと <code class="docutils literal notranslate"><span class="pre">PAGES</span></code> の構造をよく見比べること。</p>
+<p>この例は <code class="docutils literal notranslate"><span class="pre">Billy_Tipton.jpg</span></code> という画像の <code class="docutils literal notranslate"><span class="pre">title</span></code> を取得する例だった。画像を取得するにはどうすればよいだろうか？もう一度、<a class="reference external" href="https://www.mediawiki.org/wiki/API:Imageinfo">MediaWiki の <code class="docutils literal notranslate"><span class="pre">imageinfo</span></code> API のドキュメント</a> を読み返せばわかるだろう。</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./nlp100"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="nlp01.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">第2章: UNIXコマンド</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Ken Wakita<br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            <div><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 License</a>.</div>
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

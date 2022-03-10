@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>第2章: UNIXコマンド &#8212; 2021年度コンピュータサイエンス第一</title>
+    <title>第1章: 準備運動 &#8212; 2021年度コンピュータサイエンス第一</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -52,8 +52,8 @@
     <link rel="canonical" href="https://wakita.github.io/books/nlp100/nlp01.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="第３章: 正規表現" href="nlp02.html" />
-    <link rel="prev" title="第1章: 準備運動" href="nlp00.html" />
+    <link rel="next" title="第2章: UNIXコマンド" href="nlp02.html" />
+    <link rel="prev" title="言語処理100本ノック" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -177,19 +177,24 @@
    言語処理100本ノック
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="nlp00.html">
-   第1章: 準備運動
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   第2章: UNIXコマンド
+   第1章: 準備運動
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="nlp02.html">
+   第2章: UNIXコマンド
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp03.html">
    第３章: 正規表現
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp04.html">
+   第４章: 形態素解析
   </a>
  </li>
 </ul>
@@ -294,53 +299,53 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   00. 行数のカウント
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   01. タブをスペースに置換
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#col1-txt-2col2-txt">
-   02. 1列目をcol1.txtに，2列目をcol2.txtに保存
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#col1-txtcol2-txt">
-   03. col1.txtとcol2.txtをマージ
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#n">
-   04. 先頭からN行を出力
+   0. 文字列の逆順
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   05. 末尾のN行を出力
+   1. 「パタトクカシーー」
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   06. ファイルをN分割する
+   2. 「パトカー」 + 「タクシー」 = 「パタトカシーー」
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   07. １列目の文字列の異なり
+   3. 円周率
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
-   08. 各行を3コラム目の数値の降順にソート
+   4. 元素記号
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#n-gram">
+   5. n-gram
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id7">
-   09. 各行の1コラム目の文字列の出現頻度を求め，出現頻度の高い順に並べる
+   6. 集合
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   7. テンプレートによる文生成
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   8. 暗号文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#typoglycemia">
+   9. Typoglycemia
   </a>
  </li>
 </ul>
@@ -354,375 +359,63 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="unix">
-<h1>第2章: <a class="reference external" href="https://nlp100.github.io/ja/ch02.html">UNIXコマンド</a><a class="headerlink" href="#unix" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://colab.research.google.com/drive/1_Mlcisax9vVjFEAay6Kg-J0C-v_u757x?usp=sharing">脇田の回答例</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">os.path</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;popular-names.txt&#39;</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;wget https://nlp100.github.io/data/popular-names.txt&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="id1">
-<h2>00. 行数のカウント<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>テキストファイルを読み込み行の配列を作る練習。</p>
-<ul>
-<li><p>テキストファイルを読み込むときは</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>with open(&#39;ファイル名.txt&#39;) as f:
-    ファイルハンドル f を使って、読み込む。
-    with open(...) を使うと、with を抜けるときに自動的にファイルを close してくれるので便利
-</pre></div>
-</div>
-</li>
-<li><p>テキストファイルを読み込み、行ごとの配列を作るとには <a class="reference external" href="https://docs.python.org/3/library/io.html?highlight=readlines#io.IOBase.readlines"><code class="docutils literal notranslate"><span class="pre">f.readlines()</span></code> メソッド</a>を使う。</p></li>
-<li><p>UNIX コマンドで同等のことは <code class="docutils literal notranslate"><span class="pre">!wc</span> <span class="pre">-l</span> <span class="pre">popular-names.txt</span></code> で確認できる。</p></li>
-</ul>
-</div>
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>第1章: <a class="reference external" href="https://nlp100.github.io/ja/ch01.html">準備運動</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/drive/13k8_IKoSgyBWROdt0lyR8SB3dJGdFxtZ?usp=sharing">脇田の回答例</a></p>
 <div class="section" id="id2">
-<h2>01. タブをスペースに置換<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>文字列の置換には <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html?highlight=replace#str.replace"><code class="docutils literal notranslate"><span class="pre">str.replace(...)</span></code>メソッド</a>が使える。</p></li>
-<li><p>UNIX コマンドとの対比で確認するためには以下のいずれかを試みるとよい。</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">tr</span> <span class="pre">&quot;\t&quot;</span> <span class="pre">&quot;</span> <span class="pre">&quot;</span> <span class="pre">popular-names.txt</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">!sed</span> <span class="pre">-e</span> <span class="pre">'s/\t/</span> <span class="pre">/g'</span> <span class="pre">popular-names.txt</span></code></p></li>
-</ul>
-</li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># UNIX での確認方法の例</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;元の形式&quot;</span>
-<span class="o">!</span>head popular-names.txt
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\ntrで処理した場合&quot;</span>
-<span class="o">!</span>head popular-names.txt <span class="p">|</span> tr <span class="s2">&quot;\t&quot;</span> <span class="s2">&quot; &quot;</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nsedで処理した場合&quot;</span>
-<span class="o">!</span>head popular-names.txt <span class="p">|</span> sed -e <span class="s1">&#39;s/\t/ /g&#39;</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nexpandで処理した場合&quot;</span>
-<span class="o">!</span>head popular-names.txt <span class="p">|</span> expand -t <span class="m">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>元の形式
-Mary	F	7065	1880
-Anna	F	2604	1880
-Emma	F	2003	1880
-Elizabeth	F	1939	1880
-Minnie	F	1746	1880
-Margaret	F	1578	1880
-Ida	F	1472	1880
-Alice	F	1414	1880
-Bertha	F	1320	1880
-Sarah	F	1288	1880
-
-trで処理した場合
-Mary F 7065 1880
-Anna F 2604 1880
-Emma F 2003 1880
-Elizabeth F 1939 1880
-Minnie F 1746 1880
-Margaret F 1578 1880
-Ida F 1472 1880
-Alice F 1414 1880
-Bertha F 1320 1880
-Sarah F 1288 1880
-
-sedで処理した場合
-Mary F 7065 1880
-Anna F 2604 1880
-Emma F 2003 1880
-Elizabeth F 1939 1880
-Minnie F 1746 1880
-Margaret F 1578 1880
-Ida F 1472 1880
-Alice F 1414 1880
-Bertha F 1320 1880
-Sarah F 1288 1880
-
-expandで処理した場合
-Mary F 7065 1880
-Anna F 2604 1880
-Emma F 2003 1880
-Elizabeth F 1939 1880
-Minnie F 1746 1880
-Margaret F 1578 1880
-Ida F 1472 1880
-Alice F 1414 1880
-Bertha F 1320 1880
-Sarah F 1288 1880
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="col1-txt-2col2-txt">
-<h2>02. 1列目をcol1.txtに，2列目をcol2.txtに保存<a class="headerlink" href="#col1-txt-2col2-txt" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">col1.txt</span></code> には</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mary</span>
-<span class="n">Anna</span>
-<span class="n">Emma</span>
-<span class="o">...</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">col2.txt</span></code> には</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">F</span>
-<span class="n">F</span>
-<span class="n">F</span>
-</pre></div>
-</div>
-<p>と出力して欲しいということ。</p>
-<ul>
-<li><p>テキストファイルへの書き込みには <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open(ファイル名,</span> <span class="pre">'w')</span> <span class="pre">as</span> <span class="pre">w:</span></code> 構文を用いる。複数のファイルに書き込みたい場合でもひとつの <code class="docutils literal notranslate"><span class="pre">with</span></code> 文で処理できる。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>with open(&#39;readme.txt&#39;) as r, open(&#39;writeme.txt&#39;, &#39;w&#39;) as w:
-    r から読み込み、w に書き込む処理を記述する。
-</pre></div>
-</div>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">w.write(文字列)</span></code> により、出力ファイルハンドル <code class="docutils literal notranslate"><span class="pre">w</span></code> に文字列を出力できる。この関数は <code class="docutils literal notranslate"><span class="pre">print</span></code> 関数と異なり勝手に改行を挿入することはない。</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># UNIX での確認の方法の例</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;第１列の抽出&quot;</span>
-<span class="o">!</span>head popular-names.txt <span class="p">|</span> cut -f <span class="m">1</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\n第１列の抽出&quot;</span>
-<span class="o">!</span>head popular-names.txt <span class="p">|</span> cut -f <span class="m">2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>第１列の抽出
-Mary
-Anna
-Emma
-Elizabeth
-Minnie
-Margaret
-Ida
-Alice
-Bertha
-Sarah
-
-第１列の抽出
-F
-F
-F
-F
-F
-F
-F
-F
-F
-F
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="col1-txtcol2-txt">
-<h2>03. col1.txtとcol2.txtをマージ<a class="headerlink" href="#col1-txtcol2-txt" title="Permalink to this headline">¶</a></h2>
-<p>UNIX コマンドを用いた確認には以下を実行する。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!paste col1a.txt col2a.txt &gt; out3b.txt
-</pre></div>
-</div>
-</div>
-<div class="section" id="n">
-<h2>04. 先頭からN行を出力<a class="headerlink" href="#n" title="Permalink to this headline">¶</a></h2>
-<p>ノートブックのユーザに数値の入力を促すには <a class="reference external" href="https://docs.python.org/3/library/functions.html?highlight=input#input"><code class="docutils literal notranslate"><span class="pre">input(...)</span></code> 関数</a>を用いる。この関数は文字列を返すので、数値データが欲しい場合は、適宜、型変換をする。以下では <code class="docutils literal notranslate"><span class="pre">int(...)</span></code>関数 を用いる。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;先頭から何行？ &#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>UNIX コマンドを用いた確認には以下を実行する。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!head -n 5 popular-names.txt
-</pre></div>
-</div>
+<h2>0. 文字列の逆順<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.turbare.net/transl/scipy-lecture-notes/intro/language/basic_types.html#lists">リストについてのスライス構文</a>の練習</p>
 </div>
 <div class="section" id="id3">
-<h2>05. 末尾のN行を出力<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>UNIX コマンドを用いた確認には以下を実行する。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!tail -n 5 popular-names.txt
-</pre></div>
-</div>
+<h2>1. 「パタトクカシーー」<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.turbare.net/transl/scipy-lecture-notes/intro/language/basic_types.html#lists">リストについてのスライス構文</a>の練習</p>
 </div>
 <div class="section" id="id4">
-<h2>06. ファイルをN分割する<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>UNIX コマンドを用いてファイルを3分割するには以下を実行する。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!split -a 1 -l 928 popular-names.txt popular-names-
-</pre></div>
-</div>
-<p>このコマンドの実行により <code class="docutils literal notranslate"><span class="pre">popular-names-a</span></code>, <code class="docutils literal notranslate"><span class="pre">popular-names-b</span></code>, <code class="docutils literal notranslate"><span class="pre">popular-names-c</span></code> が生成される。拡張子の <code class="docutils literal notranslate"><span class="pre">.txt</span></code> をつけたかったが、その方法は提供されていないようだ。</p>
-<p><code class="docutils literal notranslate"><span class="pre">split</span></code> コマンドの各オプションの意味は詳しくは <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">split</span></code> で調べるように</p>
+<h2>2. 「パトカー」 + 「タクシー」 = 「パタトカシーー」<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">928</span></code> は 928 行ごとに分割することを指示している。ここで 928 は (popular-names.txt の行数 + 3) / 3 から得た</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-a</span> <span class="pre">1</span></code> は生成するファイルの名前の接尾辞の文字数が1文字でよいことを指示している。</p></li>
-<li><p>末尾の <code class="docutils literal notranslate"><span class="pre">popular-names-</span></code> は生成されるファイルの前置辞を指定している。</p></li>
+<li><p>文字列は文字の列として扱えるので、<a class="reference external" href="http://www.turbare.net/transl/scipy-lecture-notes/intro/language/control_flow.html#list-comprehensions">リストの内包表記</a>が利用できる。</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#zip">zip 関数</a>で二つの文字列を束ね、</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wc -l popular-names.txt
-<span class="o">!</span>split -a <span class="m">1</span> -l <span class="m">928</span> popular-names.txt popular-names-
-<span class="o">!</span>wc -l popular-names-*
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    2780 popular-names.txt
-     928 popular-names-a
-     928 popular-names-b
-     924 popular-names-c
-    2780 total
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 <div class="section" id="id5">
-<h2>07. １列目の文字列の異なり<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;cut -f 1: 第１列を取り出す&quot;</span>
-<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> head -n <span class="m">5</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nsort: （辞書式順に）整列する&quot;</span>
-<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> head -n <span class="m">5</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nuniq -c: 連続して一致する行をひとまとめにする&quot;</span>
-<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">|</span> head -n <span class="m">20</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cut -f 1: 第１列を取り出す
-Mary
-Anna
-Emma
-Elizabeth
-Minnie
-
-sort: （辞書式順に）整列する
-Abigail
-Abigail
-Abigail
-Abigail
-Abigail
-
-uniq -c: 連続して一致する行をひとまとめにする
-Abigail
-Aiden
-Alexander
-Alexis
-Alice
-Amanda
-Amelia
-Amy
-Andrew
-Angela
-Anna
-Annie
-Anthony
-Ashley
-Austin
-Ava
-Barbara
-Benjamin
-Bertha
-Bessie
-</pre></div>
-</div>
-</div>
-</div>
+<h2>3. 円周率<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html?highlight=split#str.split">文字列の <code class="docutils literal notranslate"><span class="pre">split</span></code> メソッド</a>を使って文字列を分割する。例：<code class="docutils literal notranslate"><span class="pre">文字列.split('区切り')</span></code></p></li>
+</ul>
 </div>
 <div class="section" id="id6">
-<h2>08. 各行を3コラム目の数値の降順にソート<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<p>with open(‘popular-names.txt’) as f, open(‘out8a.txt’, ‘w’) as w:
-lines = f.readlines()
-w.write(‘’.join(sorted(lines, key=lambda line: int(line.split(‘\t’)[3]))))</p>
-<p>以下の出力が整列していることを確認すれば ok
-!cut -f 4 out8a.txt | uniq</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>sort -k <span class="m">3</span> popular-names.txt <span class="p">|</span> head
-</pre></div>
+<h2>4. 元素記号<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>リストの走査には普通は内包記法を用いるが、インデックスが使いたいこともある。この場合は <a class="reference external" href="https://docs.python.org/3/library/functions.html?highlight=enumerate#enumerate"><code class="docutils literal notranslate"><span class="pre">enumerate</span></code>関数</a> を併用して <code class="docutils literal notranslate"><span class="pre">[...</span> <span class="pre">for</span> <span class="pre">i,</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">enumerate(data)]</span></code> のように使うとよい。</p>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charlotte	F	10115	2014
-Harper	F	10295	2015
-Madison	F	10320	2014
-Evelyn	F	10376	2018
-Helen	F	10479	1910
-Harper	F	10582	2018
-William	M	10593	1911
-Madison	F	10596	2013
-Abigail	F	10607	2017
-Mia	F	10639	2010
-sort: Broken pipe
-</pre></div>
-</div>
-</div>
-</div>
+<div class="section" id="n-gram">
+<h2>5. n-gram<a class="headerlink" href="#n-gram" title="Permalink to this headline">¶</a></h2>
+<p>配列に対するのスライス記法の練習</p>
 </div>
 <div class="section" id="id7">
-<h2>09. 各行の1コラム目の文字列の出現頻度を求め，出現頻度の高い順に並べる<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;cut -f 1: 第１列を取り出す&quot;</span>
-<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> head -n <span class="m">5</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nsort: （辞書式順に）整列する&quot;</span>
-<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> head -n <span class="m">5</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nuniq -c: 連続して一致する行をひとまとめにして勘定する&quot;</span>
-<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> head -n <span class="m">5</span>
-
-<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nsort -d -r: 十進数の大きさの逆順に整列&quot;</span>
-<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -d -r <span class="p">|</span> head -n <span class="m">5</span>
-</pre></div>
+<h2>6. 集合<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html?highlight=set#set-types-set-frozenset">集合型</a>の練習。集合を作るときは <code class="docutils literal notranslate"><span class="pre">set(配列)</span></code> のようにする。<code class="docutils literal notranslate"><span class="pre">set(要素1,</span> <span class="pre">要素2,</span> <span class="pre">...)</span></code> ではない。</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html?highlight=set#set-types-set-frozenset">集合型</a>に各種演算子も解説されている。</p></li>
+</ul>
 </div>
+<div class="section" id="id8">
+<h2>7. テンプレートによる文生成<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">'時の'</span> <span class="pre">+</span> <span class="pre">y</span> <span class="pre">+</span> <span class="pre">'は'</span> <span class="pre">+</span> <span class="pre">z</span></code> などと書くと読みにくいので、<a class="reference external" href="https://docs.python.org/ja/3/reference/lexical_analysis.html#f-strings">フォーマット済み文字列リテラル</a>を用いること。</p>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cut -f 1: 第１列を取り出す
-Mary
-Anna
-Emma
-Elizabeth
-Minnie
-
-sort: （辞書式順に）整列する
-Abigail
-Abigail
-Abigail
-Abigail
-Abigail
-
-uniq -c: 連続して一致する行をひとまとめにして勘定する
-  17 Abigail
-   3 Aiden
-   8 Alexander
-   8 Alexis
-  10 Alice
-
-sort -d -r: 十進数の大きさの逆順に整列
- 118 James
- 111 William
- 108 Robert
- 108 John
-  92 Mary
-</pre></div>
+<div class="section" id="id9">
+<h2>8. 暗号文<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/ja/3/library/stdtypes.html#string-methods">文字列関連のメソッド</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/ja/3/library/functions.html?highlight=chr#ord"><code class="docutils literal notranslate"><span class="pre">ord</span></code>関数</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/ja/3/library/functions.html?highlight=chr#chr"><code class="docutils literal notranslate"><span class="pre">chr</span></code>関数</a></p></li>
+</ul>
 </div>
-</div>
-</div>
+<div class="section" id="typoglycemia">
+<h2>9. Typoglycemia<a class="headerlink" href="#typoglycemia" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/ja/3/library/functions.html?highlight=len#len"><code class="docutils literal notranslate"><span class="pre">len</span></code>関数</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/ja/3/library/random.html?highlight=random#module-random"><code class="docutils literal notranslate"><span class="pre">randomモジュール</span></code></a></p></li>
+</ul>
 </div>
 </div>
 
@@ -756,11 +449,11 @@ sort -d -r: 十進数の大きさの逆順に整列
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="nlp00.html" title="previous page">
+        <a class="left-prev" href="index.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">第1章: 準備運動</p>
+                <p class="prevnext-title">言語処理100本ノック</p>
             </div>
         </a>
     </div>
@@ -768,7 +461,7 @@ sort -d -r: 十進数の大きさの逆順に整列
         <a class="right-next" href="nlp02.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">第３章: 正規表現</p>
+                <p class="prevnext-title">第2章: UNIXコマンド</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

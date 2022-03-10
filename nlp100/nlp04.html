@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>コンピュータサイエンス第一 &#8212; 2021年度コンピュータサイエンス第一</title>
+    <title>第４章: 形態素解析 &#8212; 2021年度コンピュータサイエンス第一</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -49,11 +49,10 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://wakita.github.io/books/cs1/index.html" />
+    <link rel="canonical" href="https://wakita.github.io/books/nlp100/nlp04.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Day 0: ガイダンス" href="day0.html" />
-    <link rel="prev" title="教材" href="../index.html" />
+    <link rel="prev" title="第３章: 正規表現" href="nlp03.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -92,34 +91,34 @@
   コンピュータサイエンス第一
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/index.html">
    コンピュータサイエンス第一
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="day0.html">
+  <a class="reference internal" href="../cs1/day0.html">
    Day 0: ガイダンス
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="day1.html">
+  <a class="reference internal" href="../cs1/day1.html">
    Day 1: 四則演算と繰り返し
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="day2.html">
+  <a class="reference internal" href="../cs1/day2.html">
    Day 2: 「データ = 数」はコンピューターのなかでどうなってるの？
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="day2_addendum.html">
+  <a class="reference internal" href="../cs1/day2_addendum.html">
    レポート課題1 についての捕捉
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="day3.html">
+  <a class="reference internal" href="../cs1/day3.html">
    Day 3: 配列と文字列１
   </a>
  </li>
@@ -171,29 +170,29 @@
   NLP 100本ノック
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../nlp100/index.html">
+  <a class="reference internal" href="index.html">
    言語処理100本ノック
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../nlp100/nlp01.html">
+  <a class="reference internal" href="nlp01.html">
    第1章: 準備運動
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../nlp100/nlp02.html">
+  <a class="reference internal" href="nlp02.html">
    第2章: UNIXコマンド
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../nlp100/nlp03.html">
+  <a class="reference internal" href="nlp03.html">
    第３章: 正規表現
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../nlp100/nlp04.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    第４章: 形態素解析
   </a>
  </li>
@@ -238,9 +237,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/cs1/index.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/nlp100/nlp04.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -271,11 +270,98 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/wakita/books/main?urlpath=lab/tree/courses/nlp100/nlp04.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   第４章: 形態素解析
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     参考資料
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   30. 形態素解析結果の読み込み
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   31. 動詞
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   32. 動詞の基本形
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ab">
+   33. 「AのB」
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   34. 名詞の連接
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   35. 単語の出現頻度
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   36. 頻度上位10語
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   37. 「猫」と共起頻度の高い上位10語
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   38. ヒストグラム
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zipf">
+   39. Zipfの法則
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -285,7 +371,44 @@
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>コンピュータサイエンス第一<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>第４章: <a class="reference external" href="https://nlp100.github.io/ja/ch04.html">形態素解析</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/drive/1NIrvOIfSCH_v9drBXA9LTCoFchbU3xHq?usp=sharing">脇田の回答例</a></p>
+<div class="section" id="id2">
+<h2>参考資料<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://colab.research.google.com/github/DerwenAI/spaCy_tuTorial/blob/master/spaCy_tuTorial.ipynb#scrollTo=v95pjRb1H87Z">An Introduction to Natural Language in Python using spaCy</a></p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id3">
+<h1>30. 形態素解析結果の読み込み<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id4">
+<h1>31. 動詞<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id5">
+<h1>32. 動詞の基本形<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="ab">
+<h1>33. 「AのB」<a class="headerlink" href="#ab" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id6">
+<h1>34. 名詞の連接<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id7">
+<h1>35. 単語の出現頻度<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id8">
+<h1>36. 頻度上位10語<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id9">
+<h1>37. 「猫」と共起頻度の高い上位10語<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id10">
+<h1>38. ヒストグラム<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="zipf">
+<h1>39. Zipfの法則<a class="headerlink" href="#zipf" title="Permalink to this headline">¶</a></h1>
 </div>
 
     <script type="text/x-thebe-config">
@@ -301,7 +424,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./cs1"
+            path: "./nlp100"
         },
         predefinedOutput: true
     }
@@ -318,23 +441,14 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="../index.html" title="previous page">
+        <a class="left-prev" href="nlp03.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">教材</p>
+                <p class="prevnext-title">第３章: 正規表現</p>
             </div>
         </a>
     </div>
-     <div id="next">
-        <a class="right-next" href="day0.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Day 0: ガイダンス</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         

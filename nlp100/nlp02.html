@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>第３章: 正規表現 &#8212; 2021年度コンピュータサイエンス第一</title>
+    <title>第2章: UNIXコマンド &#8212; 2021年度コンピュータサイエンス第一</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -52,7 +52,8 @@
     <link rel="canonical" href="https://wakita.github.io/books/nlp100/nlp02.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="第2章: UNIXコマンド" href="nlp01.html" />
+    <link rel="next" title="第３章: 正規表現" href="nlp03.html" />
+    <link rel="prev" title="第1章: 準備運動" href="nlp01.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -177,18 +178,23 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="nlp00.html">
-   第1章: 準備運動
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="nlp01.html">
-   第2章: UNIXコマンド
+   第1章: 準備運動
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
+   第2章: UNIXコマンド
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp03.html">
    第３章: 正規表現
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nlp04.html">
+   第４章: 形態素解析
   </a>
  </li>
 </ul>
@@ -292,59 +298,54 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   第３章: 正規表現
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   00. 行数のカウント
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#json">
-   20. JSONデータの読み込み
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   21. カテゴリ名を含む行を抽出
+   01. タブをスペースに置換
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#col1-txt-2col2-txt">
+   02. 1列目をcol1.txtに，2列目をcol2.txtに保存
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#col1-txtcol2-txt">
+   03. col1.txtとcol2.txtをマージ
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#n">
+   04. 先頭からN行を出力
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   22. カテゴリ名の抽出
+   05. 末尾のN行を出力
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   23. セクション構造
+   06. ファイルをN分割する
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   24. ファイル参照の抽出
+   07. １列目の文字列の異なり
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
-   25. テンプレートの抽出
+   08. 各行を3コラム目の数値の降順にソート
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id7">
-   26. 強調マークアップの除去
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   27. 内部リンクの除去
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mediawiki">
-   28. MediaWikiマークアップの除去
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#url">
-   29. 国旗画像のURLを取得する
+   09. 各行の1コラム目の文字列の出現頻度を求め，出現頻度の高い順に並べる
   </a>
  </li>
 </ul>
@@ -358,183 +359,376 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>第３章: <a class="reference external" href="https://nlp100.github.io/ja/ch03.html">正規表現</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://colab.research.google.com/drive/12ejBdUYMdvgoBi815E1AZpbrfsUQ9kki?usp=sharing">脇田の回答例</a></p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="json">
-<h1>20. JSONデータの読み込み<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h1>
-<p>何度もファイルをダウンロードしないように <code class="docutils literal notranslate"><span class="pre">os.path.exists</span></code> で存在しないことを確認してから、ダウンロードする。</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="unix">
+<h1>第2章: <a class="reference external" href="https://nlp100.github.io/ja/ch02.html">UNIXコマンド</a><a class="headerlink" href="#unix" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/drive/1_Mlcisax9vVjFEAay6Kg-J0C-v_u757x?usp=sharing">脇田の回答例</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gzip</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">os.path</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">os.path</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;jawiki-country.json.gz&#39;</span><span class="p">):</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;wget --quiet https://nlp100.github.io/data/jawiki-country.json.gz&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;popular-names.txt&#39;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;wget https://nlp100.github.io/data/popular-names.txt&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>つぎにダウンロードしたファイルを読み込み、イギリスのデータを取得し、<code class="docutils literal notranslate"><span class="pre">uk_text</span></code> という名前の変数に保存した。</p>
+<div class="section" id="id1">
+<h2>00. 行数のカウント<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>テキストファイルを読み込み行の配列を作る練習。</p>
+<ul>
+<li><p>テキストファイルを読み込むときは</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>with open(&#39;ファイル名.txt&#39;) as f:
+    ファイルハンドル f を使って、読み込む。
+    with open(...) を使うと、with を抜けるときに自動的にファイルを close してくれるので便利
+</pre></div>
+</div>
+</li>
+<li><p>テキストファイルを読み込み、行ごとの配列を作るとには <a class="reference external" href="https://docs.python.org/3/library/io.html?highlight=readlines#io.IOBase.readlines"><code class="docutils literal notranslate"><span class="pre">f.readlines()</span></code> メソッド</a>を使う。</p></li>
+<li><p>UNIX コマンドで同等のことは <code class="docutils literal notranslate"><span class="pre">!wc</span> <span class="pre">-l</span> <span class="pre">popular-names.txt</span></code> で確認できる。</p></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>01. タブをスペースに置換<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">GZip</span></code> で圧縮されたファイルを開くには、<a class="reference external" href="https://docs.python.org/3.10/library/gzip.html#gzip.open"><code class="docutils literal notranslate"><span class="pre">gzip.open</span></code> 関数</a> を使う。使い方は普通の <a class="reference external" href="https://docs.python.org/3.10/library/functions.html#open"><code class="docutils literal notranslate"><span class="pre">open</span></code>関数</a> とほぼ同じ。</p></li>
-<li><p>JSON形式の文字列を読み込むには<a class="reference external" href="https://docs.python.org/3.10/library/json.html#json.loads"><code class="docutils literal notranslate"><span class="pre">json.loads</span></code>関数</a>を使う。ファイルハンドルから読み込むときは <a class="reference external" href="https://docs.python.org/3.10/library/json.html#json.load"><code class="docutils literal notranslate"><span class="pre">json.load</span></code>関数</a>、逆にファイルハンドル (<code class="docutils literal notranslate"><span class="pre">w</span></code>) に書き込むときは<a class="reference external" href="https://docs.python.org/3.10/library/json.html#json.dump"><code class="docutils literal notranslate"><span class="pre">json.dump(w,</span> <span class="pre">json_data)</span></code>関数</a>。JSON 形式の文字列を取得するには <a class="reference external" href="https://docs.python.org/3.10/library/json.html#json.dumps"><code class="docutils literal notranslate"><span class="pre">json.dumps</span></code>関数</a>を使う。</p></li>
+<li><p>文字列の置換には <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html?highlight=replace#str.replace"><code class="docutils literal notranslate"><span class="pre">str.replace(...)</span></code>メソッド</a>が使える。</p></li>
+<li><p>UNIX コマンドとの対比で確認するためには以下のいずれかを試みるとよい。</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">tr</span> <span class="pre">&quot;\t&quot;</span> <span class="pre">&quot;</span> <span class="pre">&quot;</span> <span class="pre">popular-names.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">!sed</span> <span class="pre">-e</span> <span class="pre">'s/\t/</span> <span class="pre">/g'</span> <span class="pre">popular-names.txt</span></code></p></li>
+</ul>
+</li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># UNIX での確認方法の例</span>
 
-<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;jawiki-country.json.gz&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">gz</span><span class="p">:</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="nb">input</span> <span class="o">=</span> <span class="n">gz</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">input</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="k">break</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;イギリス&#39;</span><span class="p">:</span>
-            <span class="n">uk_text</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">break</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id2">
-<h1>21. カテゴリ名を含む行を抽出<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
-<p>この章の残りの問題を解くヒントを得るためにデータ形式を解析するために使う関数を定義する。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;元の形式&quot;</span>
+<span class="o">!</span>head popular-names.txt
 
-<span class="k">def</span> <span class="nf">grep</span><span class="p">(</span><span class="n">pat</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;uk_text の行のうち pat に合致するものを出力する。</span>
-<span class="sd">       Input:</span>
-<span class="sd">         - pat: 正規表現</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">rx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pat</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">uk_text</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">rx</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\ntrで処理した場合&quot;</span>
+<span class="o">!</span>head popular-names.txt <span class="p">|</span> tr <span class="s2">&quot;\t&quot;</span> <span class="s2">&quot; &quot;</span>
 
-<span class="n">grep</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span><span class="p">)</span>
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nsedで処理した場合&quot;</span>
+<span class="o">!</span>head popular-names.txt <span class="p">|</span> sed -e <span class="s1">&#39;s/\t/ /g&#39;</span>
+
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nexpandで処理した場合&quot;</span>
+<span class="o">!</span>head popular-names.txt <span class="p">|</span> expand -t <span class="m">1</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{{Sisterlinks|commons=United Kingdom|commonscat=United Kingdom|s=Category:イギリス|n=Category:イギリス|voy=United Kingdom}}
-[[Category:イギリス|*]]
-[[Category:イギリス連邦加盟国]]
-[[Category:英連邦王国|*]]
-[[Category:G8加盟国]]
-[[Category:欧州連合加盟国|元]]
-[[Category:海洋国家]]
-[[Category:現存する君主国]]
-[[Category:島国]]
-[[Category:1801年に成立した国家・領域]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>元の形式
+Mary	F	7065	1880
+Anna	F	2604	1880
+Emma	F	2003	1880
+Elizabeth	F	1939	1880
+Minnie	F	1746	1880
+Margaret	F	1578	1880
+Ida	F	1472	1880
+Alice	F	1414	1880
+Bertha	F	1320	1880
+Sarah	F	1288	1880
+
+trで処理した場合
+Mary F 7065 1880
+Anna F 2604 1880
+Emma F 2003 1880
+Elizabeth F 1939 1880
+Minnie F 1746 1880
+Margaret F 1578 1880
+Ida F 1472 1880
+Alice F 1414 1880
+Bertha F 1320 1880
+Sarah F 1288 1880
+
+sedで処理した場合
+Mary F 7065 1880
+Anna F 2604 1880
+Emma F 2003 1880
+Elizabeth F 1939 1880
+Minnie F 1746 1880
+Margaret F 1578 1880
+Ida F 1472 1880
+Alice F 1414 1880
+Bertha F 1320 1880
+Sarah F 1288 1880
+
+expandで処理した場合
+Mary F 7065 1880
+Anna F 2604 1880
+Emma F 2003 1880
+Elizabeth F 1939 1880
+Minnie F 1746 1880
+Margaret F 1578 1880
+Ida F 1472 1880
+Alice F 1414 1880
+Bertha F 1320 1880
+Sarah F 1288 1880
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id3">
-<h1>22. カテゴリ名の抽出<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
-<p>ここから本格的な正規表現の練習が始まる。詳しくは <a class="reference external" href="https://docs.python.org/3.10/howto/regex.html">Regular Expression HOWTO</a> を参照のこと。</p>
-<p>よく使う正規表現のメタ記号の使い方は：</p>
+<div class="section" id="col1-txt-2col2-txt">
+<h2>02. 1列目をcol1.txtに，2列目をcol2.txtに保存<a class="headerlink" href="#col1-txt-2col2-txt" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">col1.txt</span></code> には</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mary</span>
+<span class="n">Anna</span>
+<span class="n">Emma</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">col2.txt</span></code> には</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">F</span>
+<span class="n">F</span>
+<span class="n">F</span>
+</pre></div>
+</div>
+<p>と出力して欲しいということ。</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">[abcdef]</span></code>: <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> or <code class="docutils literal notranslate"><span class="pre">c</span></code> or <code class="docutils literal notranslate"><span class="pre">d</span></code> or <code class="docutils literal notranslate"><span class="pre">e</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[a-z]</span></code>: <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> or … or <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">z</span></code>。<code class="docutils literal notranslate"><span class="pre">[A-Z]</span></code> や <code class="docutils literal notranslate"><span class="pre">[0-9]</span></code> も同様</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[^abcdef]</span></code>: <code class="docutils literal notranslate"><span class="pre">[a-f]</span></code> に適合しない文字</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[^]abc]</span></code>: <code class="docutils literal notranslate"><span class="pre">]</span></code>, <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code> 以外の文字</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">X|Y</span></code>: <code class="docutils literal notranslate"><span class="pre">X</span></code> あるいは <code class="docutils literal notranslate"><span class="pre">Y</span></code> のいずれかの正規表現に適合する文字列</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">X*</span></code>: 正規表現<code class="docutils literal notranslate"><span class="pre">X</span></code>に適合する文字列の0個以上を接続したもの</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">X+</span></code>: 正規表現<code class="docutils literal notranslate"><span class="pre">X</span></code>に適合する文字列の1個以上を接続したもの</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">X(Y)Z</span></code>: 正規表現<code class="docutils literal notranslate"><span class="pre">XYZ</span></code>に適合する文字列。この正規表現の <code class="docutils literal notranslate"><span class="pre">match</span></code> メソッドが利用された場合、括弧に囲われた <code class="docutils literal notranslate"><span class="pre">Y</span></code> に適合する文字列を簡単に取得できる。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;-+ ([^-]+) -+&#39;</span><span class="p">)</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">rx</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;---------- This is an important message ---&#39;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">m</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># You see: This is an important message</span>
+<li><p>テキストファイルへの書き込みには <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open(ファイル名,</span> <span class="pre">'w')</span> <span class="pre">as</span> <span class="pre">w:</span></code> 構文を用いる。複数のファイルに書き込みたい場合でもひとつの <code class="docutils literal notranslate"><span class="pre">with</span></code> 文で処理できる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>with open(&#39;readme.txt&#39;) as r, open(&#39;writeme.txt&#39;, &#39;w&#39;) as w:
+    r から読み込み、w に書き込む処理を記述する。
 </pre></div>
 </div>
 </li>
+<li><p><code class="docutils literal notranslate"><span class="pre">w.write(文字列)</span></code> により、出力ファイルハンドル <code class="docutils literal notranslate"><span class="pre">w</span></code> に文字列を出力できる。この関数は <code class="docutils literal notranslate"><span class="pre">print</span></code> 関数と異なり勝手に改行を挿入することはない。</p></li>
 </ul>
-<p>この章の課題は多くは以下のような形式で解けると思う。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;グループ機能を用いた正規表現&#39;</span><span class="p">)</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># UNIX での確認の方法の例</span>
 
-<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">uk_text</span><span class="p">:</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">rx</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">m</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># m[1] は正規表現の1番目のグループに適合した部分文字列</span>
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;第１列の抽出&quot;</span>
+<span class="o">!</span>head popular-names.txt <span class="p">|</span> cut -f <span class="m">1</span>
+
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\n第１列の抽出&quot;</span>
+<span class="o">!</span>head popular-names.txt <span class="p">|</span> cut -f <span class="m">2</span>
 </pre></div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id4">
-<h1>23. セクション構造<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://www.mediawiki.org/wiki/Help:Formatting#Level_2">MediaWiki のセクション構造</a>は二個以上の <code class="docutils literal notranslate"><span class="pre">==</span></code> でセクションタイトルを挟んで以下のように記述するらしい。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span> <span class="n">Level</span> <span class="mi">2</span> <span class="o">==</span>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>第１列の抽出
+Mary
+Anna
+Emma
+Elizabeth
+Minnie
+Margaret
+Ida
+Alice
+Bertha
+Sarah
 
-<span class="o">===</span> <span class="n">Level</span> <span class="mi">3</span> <span class="o">===</span>
-
-<span class="o">====</span> <span class="n">Level</span> <span class="mi">4</span> <span class="o">====</span>
-
-<span class="o">=====</span> <span class="n">Level</span> <span class="mi">5</span> <span class="o">=====</span>
-
-<span class="o">======</span> <span class="n">Level</span> <span class="mi">6</span> <span class="o">======</span>
-</pre></div>
-</div>
-<p>これを正規表現で記述すればよい。ところで、上の例はタイトルを挟んで左右同数の <code class="docutils literal notranslate"><span class="pre">=</span></code> が出現している。Pumping 補題より、このようなパターンを正規表現で記述することはできないことが知られている。正規表現で記述する以上、同数条件は記述しないでよい。</p>
-<p>脇田の回答では、たくさん出力される項目を <code class="docutils literal notranslate"><span class="pre">IPython.display.Markdown</span></code> を用いて、表形式で出力している。</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id5">
-<h1>24. ファイル参照の抽出<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h1>
-<p>以下を実行して考える。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span><span class="p">(</span><span class="s1">&#39;ファイル&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id6">
-<h1>25. テンプレートの抽出<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h1>
-<p>以下を実行して取り組む。出力をよくよくよく観察すること。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span><span class="p">(</span><span class="s1">&#39;基礎情報&#39;</span><span class="p">)</span>
+第１列の抽出
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
 </pre></div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id7">
-<h1>26. 強調マークアップの除去<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">&quot;確立形態4</span> <span class="pre">&quot;:</span> <span class="pre">&quot;現在の国号「'''グレートブリテン及び北アイルランド連合王国'''」に変更&quot;</span></code>が該当するらしい。</p>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id8">
-<h1>27. 内部リンクの除去<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h1>
-<p>似たようなコードを書くのが面倒になってくるころかと思う。きれいなプログラムを書くには工夫を要する。</p>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="mediawiki">
-<h1>28. MediaWikiマークアップの除去<a class="headerlink" href="#mediawiki" title="Permalink to this headline">¶</a></h1>
-<p>正規表現についての最後の課題だ。がんばれ！</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="url">
-<h1>29. 国旗画像のURLを取得する<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h1>
-<p>まず、言われたとおりに <a class="reference external" href="https://www.mediawiki.org/wiki/API:Imageinfo">MediaWiki の <code class="docutils literal notranslate"><span class="pre">imageinfo</span></code> API のドキュメント</a>を眺めてみる。よくわからなくても、あきらめずに我慢して読む。</p>
-<p>説明に続いて、API を利用したときに返ってくる JSON データ (<strong>Response</strong>) と Python のサンプルコード (<strong>Sample Code</strong>) が掲載されている。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">S</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-
-<span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://en.wikipedia.org/w/api.php&quot;</span>
-
-<span class="n">PARAMS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;prop&quot;</span><span class="p">:</span> <span class="s2">&quot;imageinfo&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;titles&quot;</span><span class="p">:</span> <span class="s2">&quot;File:Billy_Tipton.jpg&quot;</span>
-<span class="p">}</span>
-
-<span class="n">R</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">URL</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">PARAMS</span><span class="p">)</span>
-<span class="n">DATA</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-<span class="n">PAGES</span> <span class="o">=</span> <span class="n">DATA</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">][</span><span class="s2">&quot;pages&quot;</span><span class="p">]</span>
-
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">PAGES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; is uploaded by User:&quot;</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;imageinfo&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;user&quot;</span><span class="p">])</span>
+<div class="section" id="col1-txtcol2-txt">
+<h2>03. col1.txtとcol2.txtをマージ<a class="headerlink" href="#col1-txtcol2-txt" title="Permalink to this headline">¶</a></h2>
+<p>UNIX コマンドを用いた確認には以下を実行する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!paste col1a.txt col2a.txt &gt; out3b.txt
 </pre></div>
 </div>
-<p><strong>Sample code</strong> の <code class="docutils literal notranslate"><span class="pre">PAGES</span></code> 変数に代入されている <code class="docutils literal notranslate"><span class="pre">DATA[&quot;query&quot;][&quot;pages&quot;]</span></code> が、<strong>Response</strong> の構造を反映していることに注目。<code class="docutils literal notranslate"><span class="pre">PAGES</span></code> は <code class="docutils literal notranslate"><span class="pre">batchcomplete</span></code>, <code class="docutils literal notranslate"><span class="pre">query</span></code> 属性を持つJSON 辞書で、<code class="docutils literal notranslate"><span class="pre">query</span></code> 属性の値もまた JSON 辞書。<code class="docutils literal notranslate"><span class="pre">query</span></code> 属性の値の <code class="docutils literal notranslate"><span class="pre">pages</span></code> 属性の値を <code class="docutils literal notranslate"><span class="pre">PAGES</span></code> に代入していることになる。<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k,</span> <span class="pre">v</span> <span class="pre">in</span> <span class="pre">PAGES.items():</span></code> のなかで <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">imageinfo</span></code> などを取得しているが、それと <code class="docutils literal notranslate"><span class="pre">PAGES</span></code> の構造をよく見比べること。</p>
-<p>この例は <code class="docutils literal notranslate"><span class="pre">Billy_Tipton.jpg</span></code> という画像の <code class="docutils literal notranslate"><span class="pre">title</span></code> を取得する例だった。画像を取得するにはどうすればよいだろうか？もう一度、<a class="reference external" href="https://www.mediawiki.org/wiki/API:Imageinfo">MediaWiki の <code class="docutils literal notranslate"><span class="pre">imageinfo</span></code> API のドキュメント</a> を読み返せばわかるだろう。</p>
+</div>
+<div class="section" id="n">
+<h2>04. 先頭からN行を出力<a class="headerlink" href="#n" title="Permalink to this headline">¶</a></h2>
+<p>ノートブックのユーザに数値の入力を促すには <a class="reference external" href="https://docs.python.org/3/library/functions.html?highlight=input#input"><code class="docutils literal notranslate"><span class="pre">input(...)</span></code> 関数</a>を用いる。この関数は文字列を返すので、数値データが欲しい場合は、適宜、型変換をする。以下では <code class="docutils literal notranslate"><span class="pre">int(...)</span></code>関数 を用いる。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;先頭から何行？ &#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>UNIX コマンドを用いた確認には以下を実行する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!head -n 5 popular-names.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>05. 末尾のN行を出力<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>UNIX コマンドを用いた確認には以下を実行する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!tail -n 5 popular-names.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>06. ファイルをN分割する<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>UNIX コマンドを用いてファイルを3分割するには以下を実行する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!split -a 1 -l 928 popular-names.txt popular-names-
+</pre></div>
+</div>
+<p>このコマンドの実行により <code class="docutils literal notranslate"><span class="pre">popular-names-a</span></code>, <code class="docutils literal notranslate"><span class="pre">popular-names-b</span></code>, <code class="docutils literal notranslate"><span class="pre">popular-names-c</span></code> が生成される。拡張子の <code class="docutils literal notranslate"><span class="pre">.txt</span></code> をつけたかったが、その方法は提供されていないようだ。</p>
+<p><code class="docutils literal notranslate"><span class="pre">split</span></code> コマンドの各オプションの意味は詳しくは <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">split</span></code> で調べるように</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">928</span></code> は 928 行ごとに分割することを指示している。ここで 928 は (popular-names.txt の行数 + 3) / 3 から得た</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-a</span> <span class="pre">1</span></code> は生成するファイルの名前の接尾辞の文字数が1文字でよいことを指示している。</p></li>
+<li><p>末尾の <code class="docutils literal notranslate"><span class="pre">popular-names-</span></code> は生成されるファイルの前置辞を指定している。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wc -l popular-names.txt
+<span class="o">!</span>split -a <span class="m">1</span> -l <span class="m">928</span> popular-names.txt popular-names-
+<span class="o">!</span>wc -l popular-names-*
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    2780 popular-names.txt
+     928 popular-names-a
+     928 popular-names-b
+     924 popular-names-c
+    2780 total
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>07. １列目の文字列の異なり<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;cut -f 1: 第１列を取り出す&quot;</span>
+<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> head -n <span class="m">5</span>
+
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nsort: （辞書式順に）整列する&quot;</span>
+<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> head -n <span class="m">5</span>
+
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nuniq -c: 連続して一致する行をひとまとめにする&quot;</span>
+<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">|</span> head -n <span class="m">20</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cut -f 1: 第１列を取り出す
+Mary
+Anna
+Emma
+Elizabeth
+Minnie
+
+sort: （辞書式順に）整列する
+Abigail
+Abigail
+Abigail
+Abigail
+Abigail
+
+uniq -c: 連続して一致する行をひとまとめにする
+Abigail
+Aiden
+Alexander
+Alexis
+Alice
+Amanda
+Amelia
+Amy
+Andrew
+Angela
+Anna
+Annie
+Anthony
+Ashley
+Austin
+Ava
+Barbara
+Benjamin
+Bertha
+Bessie
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>08. 各行を3コラム目の数値の降順にソート<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>with open(‘popular-names.txt’) as f, open(‘out8a.txt’, ‘w’) as w:
+lines = f.readlines()
+w.write(‘’.join(sorted(lines, key=lambda line: int(line.split(‘\t’)[3]))))</p>
+<p>以下の出力が整列していることを確認すれば ok
+!cut -f 4 out8a.txt | uniq</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>sort -k <span class="m">3</span> popular-names.txt <span class="p">|</span> head
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Charlotte	F	10115	2014
+Harper	F	10295	2015
+Madison	F	10320	2014
+Evelyn	F	10376	2018
+Helen	F	10479	1910
+Harper	F	10582	2018
+William	M	10593	1911
+Madison	F	10596	2013
+Abigail	F	10607	2017
+Mia	F	10639	2010
+sort: Broken pipe
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>09. 各行の1コラム目の文字列の出現頻度を求め，出現頻度の高い順に並べる<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;cut -f 1: 第１列を取り出す&quot;</span>
+<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> head -n <span class="m">5</span>
+
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nsort: （辞書式順に）整列する&quot;</span>
+<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> head -n <span class="m">5</span>
+
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nuniq -c: 連続して一致する行をひとまとめにして勘定する&quot;</span>
+<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> head -n <span class="m">5</span>
+
+<span class="o">!</span><span class="nb">echo</span> <span class="s2">&quot;\nsort -d -r: 十進数の大きさの逆順に整列&quot;</span>
+<span class="o">!</span>cut -f <span class="m">1</span> popular-names.txt <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -d -r <span class="p">|</span> head -n <span class="m">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cut -f 1: 第１列を取り出す
+Mary
+Anna
+Emma
+Elizabeth
+Minnie
+
+sort: （辞書式順に）整列する
+Abigail
+Abigail
+Abigail
+Abigail
+Abigail
+
+uniq -c: 連続して一致する行をひとまとめにして勘定する
+  17 Abigail
+   3 Aiden
+   8 Alexander
+   8 Alexis
+  10 Alice
+
+sort -d -r: 十進数の大きさの逆順に整列
+ 118 James
+ 111 William
+ 108 Robert
+ 108 John
+  92 Mary
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -571,10 +765,19 @@
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">第2章: UNIXコマンド</p>
+                <p class="prevnext-title">第1章: 準備運動</p>
             </div>
         </a>
     </div>
+     <div id="next">
+        <a class="right-next" href="nlp03.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">第３章: 正規表現</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

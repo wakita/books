@@ -167,13 +167,13 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  NLP 100本ノック
+  NLP 100本ノックのヒント
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
-   言語処理100本ノック
+   言語処理100本ノックのヒント
   </a>
  </li>
  <li class="toctree-l1">
@@ -310,6 +310,16 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#google-drive">
+   Google Drive へのアクセス
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spacy">
+   spaCy のアップグレードと実行
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
    30. 形態素解析結果の読み込み
   </a>
@@ -375,9 +385,264 @@
 <p><a class="reference external" href="https://colab.research.google.com/drive/1NIrvOIfSCH_v9drBXA9LTCoFchbU3xHq?usp=sharing">脇田の回答例</a></p>
 <div class="section" id="id2">
 <h2>参考資料<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://colab.research.google.com/github/DerwenAI/spaCy_tuTorial/blob/master/spaCy_tuTorial.ipynb#scrollTo=v95pjRb1H87Z">An Introduction to Natural Language in Python using spaCy</a></p></li>
+<ul>
+<li><p><a class="reference external" href="https://colab.research.google.com/github/DerwenAI/spaCy_tuTorial/blob/master/spaCy_tuTorial.ipynb#scrollTo=v95pjRb1H87Z">An Introduction to Natural Language in Python using spaCy</a>
+これは Google Colab とは独立した SpaCy の解説のようだ</p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/59484501/how-to-get-started-with-spacy-library-and-its-module-in-google-colab">How to get started with SpaCy and its module in Google Colab?</a>: (answered at S/O on 2019-12-28)</p>
+<p>SpaCy のアップグレード、モデルのダウンロード、などなどが必要。</p>
+</li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/67646437/how-do-i-import-the-saved-module-in-google-colab">How do I import the saved ~module~ model in Google Colab</a></p>
+<p>この質問は Google Drive に保存したモデルを使って spaCy を利用する方法について。<code class="docutils literal notranslate"><span class="pre">drive.mount</span></code> してから、<code class="docutils literal notranslate"><span class="pre">nlp.to_disk(&quot;RCM.model&quot;)</span></code> と <code class="docutils literal notranslate"><span class="pre">spacy.load(&quot;RCM.model&quot;)</span></code> を使えばよいようだ。共有ドライブでこれらの機能が動けば嬉しい。</p>
+</li>
+<li><p><a class="reference external" href="https://www.mojirca.com/2019/10/colab-load-ginza.html">GoogleColabで日本語NLPライブラリGiNZAがloadできない</a></p>
+<p>日本語の場合は GiNZA を使う。</p>
+</li>
+<li><p><a class="reference external" href="https://qiita.com/matsunori39/items/b7905bb3c838b5862c32">Colabで日本語対応したspaCyを動かしてみる</a>: (Qiita on 2022-01-27)</p>
+<p>GiNZA についてはこちらの方がまとまっているかも</p>
+</li>
 </ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="google-drive">
+<h1>Google Drive へのアクセス<a class="headerlink" href="#google-drive" title="Permalink to this headline">¶</a></h1>
+<p>第３章で経験したように Google Colaboratory はファイルの読み書きはできる。しかし、Colaboratory は一時的な仮想機械で動いているため、Colaboratory の仮想記憶を停止した時点でファイル群は消えてなくなる。これで恒久的に保存したいファイルへのアクセスができなくて困ることがある。</p>
+<p>Colaboratory に Google Drive へのアクセス権限を付与することで Google Drive 上のファイルを読み書きできるようになる。このような利用例に繰り返し利用するデータセットがある。データセットを Google Drive に保存しておき、それに Colaboratory からアクセスすれば Colaboratory を起動するごとにデータセットをダウンロードしなくてすむ。</p>
+<p>Google Drive から共有された巨大なデータセットについては、それを自分の Drive に保存しないでも直接読み込むことができるかもしれない。もし、それが可能なら自分の Google Drive の容量を圧迫しないですみそうだ。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Google Drive は Google Colaboratory の仮想機械にマウントしてアクセス可能にする。</span>
+
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/drive&#39;</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/drive/MyDrive/hello.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Hello Google Colaboratory!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ちゃんと書き込まれているか確認する</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/drive/MyDrive/hello.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="spacy">
+<h1>spaCy のアップグレードと実行<a class="headerlink" href="#spacy" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip show spacy   # Colaboratory 上のバージョンは v2.2.4 (2022-03-12)。最新版は v3.2</span>
+<span class="o">!</span>pip install --upgrade spacy --quiet
+<span class="o">!</span>pip show spacy
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: You are using pip version 21.3.1; however, version 22.0.4 is available.</span>
+<span class=" -Color -Color-Yellow">You should consider upgrading via the &#39;/Users/wakita/.venvs/book/bin/python3.9 -m pip install --upgrade pip&#39; command.</span>
+Name: spacy
+Version: 3.2.3
+Summary: Industrial-strength Natural Language Processing (NLP) in Python
+Home-page: https://spacy.io
+Author: Explosion
+Author-email: contact@explosion.ai
+License: MIT
+Location: /Users/wakita/.venvs/book/lib/python3.9/site-packages
+Requires: blis, catalogue, cymem, jinja2, langcodes, murmurhash, numpy, packaging, pathy, preshed, pydantic, requests, setuptools, spacy-legacy, spacy-loggers, srsly, thinc, tqdm, typer, wasabi
+Required-by: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>日本語版の spaCy の利用には sudachi (<code class="docutils literal notranslate"><span class="pre">sudachipy</span></code> と <code class="docutils literal notranslate"><span class="pre">sudachidict_core</span></code>) が必要になる。これらを一括インストールするパッケージが <code class="docutils literal notranslate"><span class="pre">spacy[ja]</span></code> らしい。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade pip --quiet
+<span class="o">!</span>pip install <span class="s1">&#39;spacy[ja]&#39;</span> --quiet
+<span class="o">!</span>pip show <span class="s1">&#39;sudachipy&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Name: SudachiPy
+Version: 0.6.3
+Summary: Python version of Sudachi, the Japanese Morphological Analyzer
+Home-page: https://github.com/WorksApplications/sudachi.rs/tree/develop/python
+Author: Works Applications
+Author-email: sudachi@worksap.co.jp
+License: Apache-2.0
+Location: /Users/wakita/.venvs/book/lib/python3.9/site-packages
+Requires: 
+Required-by: SudachiDict-core
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">blank</span><span class="p">(</span><span class="s2">&quot;ja&quot;</span><span class="p">)</span>
+
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;国境の長いトンネルを抜けると雪国であった。&#39;</span><span class="p">)</span>
+
+<span class="n">doc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>国境の長いトンネルを抜けると雪国であった。
+</pre></div>
+</div>
+</div>
+</div>
+<p>spaCy の <code class="docutils literal notranslate"><span class="pre">doc</span></code> オブジェクトは一見すると文字列に見えるけれども、実はトークン列を表現している。以下ではトークンが提供する属性を列挙している。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Markdown</span>
+
+<span class="n">Markdown</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;`</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s1">`&#39;</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">ancestors</span></code>, <code class="docutils literal notranslate"><span class="pre">check_flag</span></code>, <code class="docutils literal notranslate"><span class="pre">children</span></code>, <code class="docutils literal notranslate"><span class="pre">cluster</span></code>, <code class="docutils literal notranslate"><span class="pre">conjuncts</span></code>, <code class="docutils literal notranslate"><span class="pre">dep</span></code>, <code class="docutils literal notranslate"><span class="pre">dep_</span></code>, <code class="docutils literal notranslate"><span class="pre">doc</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_id</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_id_</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_iob</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_iob_</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_kb_id</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_kb_id_</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_type</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_type_</span></code>, <code class="docutils literal notranslate"><span class="pre">get_extension</span></code>, <code class="docutils literal notranslate"><span class="pre">has_dep</span></code>, <code class="docutils literal notranslate"><span class="pre">has_extension</span></code>, <code class="docutils literal notranslate"><span class="pre">has_head</span></code>, <code class="docutils literal notranslate"><span class="pre">has_morph</span></code>, <code class="docutils literal notranslate"><span class="pre">has_vector</span></code>, <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">idx</span></code>, <code class="docutils literal notranslate"><span class="pre">iob_strings</span></code>, <code class="docutils literal notranslate"><span class="pre">is_alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">is_ancestor</span></code>, <code class="docutils literal notranslate"><span class="pre">is_ascii</span></code>, <code class="docutils literal notranslate"><span class="pre">is_bracket</span></code>, <code class="docutils literal notranslate"><span class="pre">is_currency</span></code>, <code class="docutils literal notranslate"><span class="pre">is_digit</span></code>, <code class="docutils literal notranslate"><span class="pre">is_left_punct</span></code>, <code class="docutils literal notranslate"><span class="pre">is_lower</span></code>, <code class="docutils literal notranslate"><span class="pre">is_oov</span></code>, <code class="docutils literal notranslate"><span class="pre">is_punct</span></code>, <code class="docutils literal notranslate"><span class="pre">is_quote</span></code>, <code class="docutils literal notranslate"><span class="pre">is_right_punct</span></code>, <code class="docutils literal notranslate"><span class="pre">is_sent_end</span></code>, <code class="docutils literal notranslate"><span class="pre">is_sent_start</span></code>, <code class="docutils literal notranslate"><span class="pre">is_space</span></code>, <code class="docutils literal notranslate"><span class="pre">is_stop</span></code>, <code class="docutils literal notranslate"><span class="pre">is_title</span></code>, <code class="docutils literal notranslate"><span class="pre">is_upper</span></code>, <code class="docutils literal notranslate"><span class="pre">lang</span></code>, <code class="docutils literal notranslate"><span class="pre">lang_</span></code>, <code class="docutils literal notranslate"><span class="pre">left_edge</span></code>, <code class="docutils literal notranslate"><span class="pre">lefts</span></code>, <code class="docutils literal notranslate"><span class="pre">lemma</span></code>, <code class="docutils literal notranslate"><span class="pre">lemma_</span></code>, <code class="docutils literal notranslate"><span class="pre">lex</span></code>, <code class="docutils literal notranslate"><span class="pre">lex_id</span></code>, <code class="docutils literal notranslate"><span class="pre">like_email</span></code>, <code class="docutils literal notranslate"><span class="pre">like_num</span></code>, <code class="docutils literal notranslate"><span class="pre">like_url</span></code>, <code class="docutils literal notranslate"><span class="pre">lower</span></code>, <code class="docutils literal notranslate"><span class="pre">lower_</span></code>, <code class="docutils literal notranslate"><span class="pre">morph</span></code>, <code class="docutils literal notranslate"><span class="pre">n_lefts</span></code>, <code class="docutils literal notranslate"><span class="pre">n_rights</span></code>, <code class="docutils literal notranslate"><span class="pre">nbor</span></code>, <code class="docutils literal notranslate"><span class="pre">norm</span></code>, <code class="docutils literal notranslate"><span class="pre">norm_</span></code>, <code class="docutils literal notranslate"><span class="pre">orth</span></code>, <code class="docutils literal notranslate"><span class="pre">orth_</span></code>, <code class="docutils literal notranslate"><span class="pre">pos</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix_</span></code>, <code class="docutils literal notranslate"><span class="pre">prob</span></code>, <code class="docutils literal notranslate"><span class="pre">rank</span></code>, <code class="docutils literal notranslate"><span class="pre">remove_extension</span></code>, <code class="docutils literal notranslate"><span class="pre">right_edge</span></code>, <code class="docutils literal notranslate"><span class="pre">rights</span></code>, <code class="docutils literal notranslate"><span class="pre">sent</span></code>, <code class="docutils literal notranslate"><span class="pre">sent_start</span></code>, <code class="docutils literal notranslate"><span class="pre">sentiment</span></code>, <code class="docutils literal notranslate"><span class="pre">set_extension</span></code>, <code class="docutils literal notranslate"><span class="pre">set_morph</span></code>, <code class="docutils literal notranslate"><span class="pre">shape</span></code>, <code class="docutils literal notranslate"><span class="pre">shape_</span></code>, <code class="docutils literal notranslate"><span class="pre">similarity</span></code>, <code class="docutils literal notranslate"><span class="pre">subtree</span></code>, <code class="docutils literal notranslate"><span class="pre">suffix</span></code>, <code class="docutils literal notranslate"><span class="pre">suffix_</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_</span></code>, <code class="docutils literal notranslate"><span class="pre">tensor</span></code>, <code class="docutils literal notranslate"><span class="pre">text</span></code>, <code class="docutils literal notranslate"><span class="pre">text_with_ws</span></code>, <code class="docutils literal notranslate"><span class="pre">vector</span></code>, <code class="docutils literal notranslate"><span class="pre">vector_norm</span></code>, <code class="docutils literal notranslate"><span class="pre">vocab</span></code>, <code class="docutils literal notranslate"><span class="pre">whitespace_</span></code></p>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">((</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;国境&#39;, &#39;国境&#39;, &#39;NOUN&#39;, &#39;noun&#39;)
+(&#39;の&#39;, &#39;の&#39;, &#39;ADP&#39;, &#39;adposition&#39;)
+(&#39;長い&#39;, &#39;長い&#39;, &#39;ADJ&#39;, &#39;adjective&#39;)
+(&#39;トンネル&#39;, &#39;トンネル&#39;, &#39;NOUN&#39;, &#39;noun&#39;)
+(&#39;を&#39;, &#39;を&#39;, &#39;ADP&#39;, &#39;adposition&#39;)
+(&#39;抜ける&#39;, &#39;抜ける&#39;, &#39;VERB&#39;, &#39;verb&#39;)
+(&#39;と&#39;, &#39;と&#39;, &#39;SCONJ&#39;, &#39;subordinating conjunction&#39;)
+(&#39;雪国&#39;, &#39;雪国&#39;, &#39;NOUN&#39;, &#39;noun&#39;)
+(&#39;で&#39;, &#39;だ&#39;, &#39;AUX&#39;, &#39;auxiliary&#39;)
+(&#39;あっ&#39;, &#39;ある&#39;, &#39;AUX&#39;, &#39;auxiliary&#39;)
+(&#39;た&#39;, &#39;た&#39;, &#39;AUX&#39;, &#39;auxiliary&#39;)
+(&#39;。&#39;, &#39;。&#39;, &#39;PUNCT&#39;, &#39;punctuation&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>ところで、前述のトークンの属性を眺めると lemma と lemma_ のようによく似た属性があることに気付くだろう。spaCy は記憶領域を圧縮するためにカテゴリー値を Hash 値で表現している。_ を含まない属性名はそのような Hash 値を表し、それに対応した _ で終わる属性は元の値を表す。
+たとえば、「雪国」のlemma について調べてみよう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s1">&#39;雪国&#39;</span><span class="p">:</span>
+        <span class="n">雪国</span> <span class="o">=</span> <span class="n">t</span>
+
+<span class="p">(</span><span class="n">雪国</span><span class="o">.</span><span class="n">lemma</span><span class="p">,</span> <span class="n">雪国</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">雪国</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">雪国</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7845350659413489886, &#39;雪国&#39;, 92, &#39;NOUN&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>このように <code class="docutils literal notranslate"><span class="pre">_</span></code> で終わる属性名を持つ属性が Hash 表現されたものと考えられるので、それらを列挙すると spaCy のだいたいの機能がわかると思う。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token_attrs</span> <span class="o">=</span> <span class="nb">dir</span><span class="p">(</span><span class="n">雪国</span><span class="p">)</span>
+<span class="n">Markdown</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="n">attr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">token_attrs</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">([</span><span class="n">attr</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">token_attrs</span><span class="p">])])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p>dep, ent_id, ent_iob, ent_kb_id, ent_type, lang, lemma, lower, norm, orth, pos, prefix, shape, suffix, tag</p>
+</div>
+</div>
+<p>spaCy の <code class="docutils literal notranslate"><span class="pre">doc</span></code> を Pandas DataFrame に読み込むとアクセスが簡単なので、変換する。以下の例ではストップワードを除外している点に注意。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">)]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">is_stop</span><span class="p">],</span>
+                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;lemma&quot;</span><span class="p">,</span> <span class="s2">&quot;POS&quot;</span><span class="p">,</span> <span class="s2">&quot;explain&quot;</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>lemma</th>
+      <th>POS</th>
+      <th>explain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>国境</td>
+      <td>国境</td>
+      <td>NOUN</td>
+      <td>noun</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>長い</td>
+      <td>長い</td>
+      <td>ADJ</td>
+      <td>adjective</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>トンネル</td>
+      <td>トンネル</td>
+      <td>NOUN</td>
+      <td>noun</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>抜ける</td>
+      <td>抜ける</td>
+      <td>VERB</td>
+      <td>verb</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>雪国</td>
+      <td>雪国</td>
+      <td>NOUN</td>
+      <td>noun</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>。</td>
+      <td>。</td>
+      <td>PUNCT</td>
+      <td>punctuation</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="id3">

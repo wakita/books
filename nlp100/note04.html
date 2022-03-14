@@ -1,0 +1,1521 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第４章: 形態素解析 &#8212; 2021年度コンピュータサイエンス第一</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://wakita.github.io/books/nlp100/note04.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="第３章: 正規表現" href="note03.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cs21.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">2021年度コンピュータサイエンス第一</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption" role="heading">
+ <span class="caption-text">
+  コンピュータサイエンス第一
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/index.html">
+   コンピュータサイエンス第一
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day0.html">
+   Day 0: ガイダンス
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day1.html">
+   Day 1: 四則演算と繰り返し
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day2.html">
+   Day 2: 「データ = 数」はコンピューターのなかでどうなってるの？
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day2_addendum.html">
+   レポート課題1 についての捕捉
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../cs1/day3.html">
+   Day 3: 配列と文字列１
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  ランナーのためのPython
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/index.html">
+   ランナーのためのPython
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/memo.html">
+   複数行にわたる文字列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/Enjoy%20Simple%20English.html">
+   Enjoy Simple English
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/%E5%9F%BA%E7%A4%8E%E8%8B%B1%E8%AA%9E%E3%83%AC%E3%83%99%E3%83%AB1.html">
+   中学生の基礎英語レベル１
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/%E5%9F%BA%E7%A4%8E%E8%8B%B1%E8%AA%9E%E3%83%AC%E3%83%99%E3%83%AB2.html">
+   中学生の基礎英語レベル２
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/%E7%8F%BE%E4%BB%A3%E8%8B%B1%E8%AA%9E.html">
+   高校生からはじめる「現代英語」
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../py/notes/Python1%E5%B9%B4%E7%94%9F.html">
+   Python１年生
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  NLP 100本ノックのヒント
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   言語処理100本ノックのヒント
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="note01.html">
+   第1章: 準備運動
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="note02.html">
+   第2章: UNIXコマンド
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="note03.html">
+   第３章: 正規表現
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第４章: 形態素解析
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/nlp100/note04.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/wakita/books"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/wakita/books/main?urlpath=lab/tree/courses/nlp100/note04.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   第４章: 形態素解析
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     参考資料
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neko-txt">
+   データセット (
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     neko.txt
+    </span>
+   </code>
+   ) へのアクセス
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spacy">
+   spaCy のアップグレードと実行
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   30. 形態素解析結果の読み込み
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   31. 動詞
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   32. 動詞の基本形
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ab">
+   33. 「AのB」
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   34. 名詞の連接
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   35. 単語の出現頻度
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   36. 頻度上位10語
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   37. 「猫」と共起頻度の高い上位10語
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   38. ヒストグラム
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zipf">
+   39. Zipfの法則
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>第４章: <a class="reference external" href="https://nlp100.github.io/ja/ch04.html">形態素解析</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://colab.research.google.com/drive/1NIrvOIfSCH_v9drBXA9LTCoFchbU3xHq?usp=sharing">脇田の回答例</a></p>
+<div class="section" id="id2">
+<h2>参考資料<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p><a class="reference external" href="https://colab.research.google.com/github/DerwenAI/spaCy_tuTorial/blob/master/spaCy_tuTorial.ipynb#scrollTo=v95pjRb1H87Z">An Introduction to Natural Language in Python using spaCy</a>
+これは Google Colab とは独立した SpaCy の解説のようだ</p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/59484501/how-to-get-started-with-spacy-library-and-its-module-in-google-colab">How to get started with SpaCy and its module in Google Colab?</a>: (answered at S/O on 2019-12-28)</p>
+<p>SpaCy のアップグレード、モデルのダウンロード、などなどが必要。</p>
+</li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/67646437/how-do-i-import-the-saved-module-in-google-colab">How do I import the saved ~module~ model in Google Colab</a></p>
+<p>この質問は Google Drive に保存したモデルを使って spaCy を利用する方法について。<code class="docutils literal notranslate"><span class="pre">drive.mount</span></code> してから、<code class="docutils literal notranslate"><span class="pre">nlp.to_disk(&quot;RCM.model&quot;)</span></code> と <code class="docutils literal notranslate"><span class="pre">spacy.load(&quot;RCM.model&quot;)</span></code> を使えばよいようだ。共有ドライブでこれらの機能が動けば嬉しい。</p>
+</li>
+<li><p><a class="reference external" href="https://www.mojirca.com/2019/10/colab-load-ginza.html">GoogleColabで日本語NLPライブラリGiNZAがloadできない</a></p>
+<p>日本語の場合は GiNZA を使う。</p>
+</li>
+<li><p><a class="reference external" href="https://qiita.com/matsunori39/items/b7905bb3c838b5862c32">Colabで日本語対応したspaCyを動かしてみる</a>: (Qiita on 2022-01-27)</p>
+<p>GiNZA についてはこちらの方がまとまっているかも</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="neko-txt">
+<h1>データセット (<code class="docutils literal notranslate"><span class="pre">neko.txt</span></code>) へのアクセス<a class="headerlink" href="#neko-txt" title="Permalink to this headline">¶</a></h1>
+<p>Google Drive 共有フォルダにデータセット (<code class="docutils literal notranslate"><span class="pre">neko.txt</span></code>) は保存してあるので第３章と同様にこれを読み込んで使う。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># NLP100 のデータセットを共有するフォルダへのショートカットへの Path。</span>
+<span class="c1"># 以下の行は自分の設定に応じて適宜修正すること。</span>
+<span class="n">DATADIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/drive/MyDrive/research/2022/nlp100_wakita/data&#39;</span><span class="p">)</span>
+
+<span class="c1"># Google Drive を Google Colaboratory の仮想機械にマウントしてアクセス可能にする。</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/drive&#39;</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DATADIR</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;neko.txt&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[:</span><span class="mi">10</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /drive
+一
+
+　吾輩は猫である。
+名前はまだ無い。
+
+　どこで生れたかとんと見当がつかぬ。
+何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。
+吾輩はここで始めて人間というものを見た。
+しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。
+この書生というのは時々我々を捕えて煮て食うという話である。
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="spacy">
+<h1>spaCy のアップグレードと実行<a class="headerlink" href="#spacy" title="Permalink to this headline">¶</a></h1>
+<p>日本語版の spaCy の利用には sudachi (<code class="docutils literal notranslate"><span class="pre">sudachipy</span></code> と <code class="docutils literal notranslate"><span class="pre">sudachidict_core</span></code>) が必要になる。これらを一括インストールするパッケージが <code class="docutils literal notranslate"><span class="pre">spacy[ja]</span></code> らしい。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip show spacy   # Colaboratory 上のバージョンは v2.2.4 (2022-03-12)。最新版は v3.2</span>
+<span class="o">!</span>pip install --upgrade spacy <span class="s1">&#39;spacy[ja]&#39;</span> --quiet
+<span class="o">!</span>pip show spacy sudachipy
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Name: spacy
+Version: 3.2.3
+Summary: Industrial-strength Natural Language Processing (NLP) in Python
+Home-page: https://spacy.io
+Author: Explosion
+Author-email: contact@explosion.ai
+License: MIT
+Location: /usr/local/lib/python3.7/dist-packages
+Requires: langcodes, jinja2, typer, pydantic, packaging, cymem, typing-extensions, tqdm, requests, spacy-legacy, setuptools, numpy, blis, catalogue, thinc, srsly, preshed, pathy, wasabi, spacy-loggers, murmurhash
+Required-by: fastai, en-core-web-sm
+---
+Name: SudachiPy
+Version: 0.6.3
+Summary: Python version of Sudachi, the Japanese Morphological Analyzer
+Home-page: https://github.com/WorksApplications/sudachi.rs/tree/develop/python
+Author: Works Applications
+Author-email: sudachi@worksap.co.jp
+License: Apache-2.0
+Location: /usr/local/lib/python3.7/dist-packages
+Requires: 
+Required-by: SudachiDict-core
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">blank</span><span class="p">(</span><span class="s2">&quot;ja&quot;</span><span class="p">)</span>
+
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;国境の長いトンネルを抜けると雪国であった。&#39;</span><span class="p">)</span>
+<span class="n">doc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>国境の長いトンネルを抜けると雪国であった。
+</pre></div>
+</div>
+</div>
+</div>
+<p>spaCy の <code class="docutils literal notranslate"><span class="pre">doc</span></code> オブジェクトは一見すると文字列に見えるけれども、実はトークン列を表現している。以下ではトークンが提供する属性を列挙している。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">Markdown</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;`</span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s1">`&#39;</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">ancestors</span></code>, <code class="docutils literal notranslate"><span class="pre">check_flag</span></code>, <code class="docutils literal notranslate"><span class="pre">children</span></code>, <code class="docutils literal notranslate"><span class="pre">cluster</span></code>, <code class="docutils literal notranslate"><span class="pre">conjuncts</span></code>, <code class="docutils literal notranslate"><span class="pre">dep</span></code>, <code class="docutils literal notranslate"><span class="pre">dep_</span></code>, <code class="docutils literal notranslate"><span class="pre">doc</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_id</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_id_</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_iob</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_iob_</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_kb_id</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_kb_id_</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_type</span></code>, <code class="docutils literal notranslate"><span class="pre">ent_type_</span></code>, <code class="docutils literal notranslate"><span class="pre">get_extension</span></code>, <code class="docutils literal notranslate"><span class="pre">has_dep</span></code>, <code class="docutils literal notranslate"><span class="pre">has_extension</span></code>, <code class="docutils literal notranslate"><span class="pre">has_head</span></code>, <code class="docutils literal notranslate"><span class="pre">has_morph</span></code>, <code class="docutils literal notranslate"><span class="pre">has_vector</span></code>, <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">idx</span></code>, <code class="docutils literal notranslate"><span class="pre">iob_strings</span></code>, <code class="docutils literal notranslate"><span class="pre">is_alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">is_ancestor</span></code>, <code class="docutils literal notranslate"><span class="pre">is_ascii</span></code>, <code class="docutils literal notranslate"><span class="pre">is_bracket</span></code>, <code class="docutils literal notranslate"><span class="pre">is_currency</span></code>, <code class="docutils literal notranslate"><span class="pre">is_digit</span></code>, <code class="docutils literal notranslate"><span class="pre">is_left_punct</span></code>, <code class="docutils literal notranslate"><span class="pre">is_lower</span></code>, <code class="docutils literal notranslate"><span class="pre">is_oov</span></code>, <code class="docutils literal notranslate"><span class="pre">is_punct</span></code>, <code class="docutils literal notranslate"><span class="pre">is_quote</span></code>, <code class="docutils literal notranslate"><span class="pre">is_right_punct</span></code>, <code class="docutils literal notranslate"><span class="pre">is_sent_end</span></code>, <code class="docutils literal notranslate"><span class="pre">is_sent_start</span></code>, <code class="docutils literal notranslate"><span class="pre">is_space</span></code>, <code class="docutils literal notranslate"><span class="pre">is_stop</span></code>, <code class="docutils literal notranslate"><span class="pre">is_title</span></code>, <code class="docutils literal notranslate"><span class="pre">is_upper</span></code>, <code class="docutils literal notranslate"><span class="pre">lang</span></code>, <code class="docutils literal notranslate"><span class="pre">lang_</span></code>, <code class="docutils literal notranslate"><span class="pre">left_edge</span></code>, <code class="docutils literal notranslate"><span class="pre">lefts</span></code>, <code class="docutils literal notranslate"><span class="pre">lemma</span></code>, <code class="docutils literal notranslate"><span class="pre">lemma_</span></code>, <code class="docutils literal notranslate"><span class="pre">lex</span></code>, <code class="docutils literal notranslate"><span class="pre">lex_id</span></code>, <code class="docutils literal notranslate"><span class="pre">like_email</span></code>, <code class="docutils literal notranslate"><span class="pre">like_num</span></code>, <code class="docutils literal notranslate"><span class="pre">like_url</span></code>, <code class="docutils literal notranslate"><span class="pre">lower</span></code>, <code class="docutils literal notranslate"><span class="pre">lower_</span></code>, <code class="docutils literal notranslate"><span class="pre">morph</span></code>, <code class="docutils literal notranslate"><span class="pre">n_lefts</span></code>, <code class="docutils literal notranslate"><span class="pre">n_rights</span></code>, <code class="docutils literal notranslate"><span class="pre">nbor</span></code>, <code class="docutils literal notranslate"><span class="pre">norm</span></code>, <code class="docutils literal notranslate"><span class="pre">norm_</span></code>, <code class="docutils literal notranslate"><span class="pre">orth</span></code>, <code class="docutils literal notranslate"><span class="pre">orth_</span></code>, <code class="docutils literal notranslate"><span class="pre">pos</span></code>, <code class="docutils literal notranslate"><span class="pre">pos_</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix_</span></code>, <code class="docutils literal notranslate"><span class="pre">prob</span></code>, <code class="docutils literal notranslate"><span class="pre">rank</span></code>, <code class="docutils literal notranslate"><span class="pre">remove_extension</span></code>, <code class="docutils literal notranslate"><span class="pre">right_edge</span></code>, <code class="docutils literal notranslate"><span class="pre">rights</span></code>, <code class="docutils literal notranslate"><span class="pre">sent</span></code>, <code class="docutils literal notranslate"><span class="pre">sent_start</span></code>, <code class="docutils literal notranslate"><span class="pre">sentiment</span></code>, <code class="docutils literal notranslate"><span class="pre">set_extension</span></code>, <code class="docutils literal notranslate"><span class="pre">set_morph</span></code>, <code class="docutils literal notranslate"><span class="pre">shape</span></code>, <code class="docutils literal notranslate"><span class="pre">shape_</span></code>, <code class="docutils literal notranslate"><span class="pre">similarity</span></code>, <code class="docutils literal notranslate"><span class="pre">subtree</span></code>, <code class="docutils literal notranslate"><span class="pre">suffix</span></code>, <code class="docutils literal notranslate"><span class="pre">suffix_</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_</span></code>, <code class="docutils literal notranslate"><span class="pre">tensor</span></code>, <code class="docutils literal notranslate"><span class="pre">text</span></code>, <code class="docutils literal notranslate"><span class="pre">text_with_ws</span></code>, <code class="docutils literal notranslate"><span class="pre">vector</span></code>, <code class="docutils literal notranslate"><span class="pre">vector_norm</span></code>, <code class="docutils literal notranslate"><span class="pre">vocab</span></code>, <code class="docutils literal notranslate"><span class="pre">whitespace_</span></code></p>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">((</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;国境&#39;, &#39;国境&#39;, &#39;NOUN&#39;, &#39;noun&#39;)
+(&#39;の&#39;, &#39;の&#39;, &#39;ADP&#39;, &#39;adposition&#39;)
+(&#39;長い&#39;, &#39;長い&#39;, &#39;ADJ&#39;, &#39;adjective&#39;)
+(&#39;トンネル&#39;, &#39;トンネル&#39;, &#39;NOUN&#39;, &#39;noun&#39;)
+(&#39;を&#39;, &#39;を&#39;, &#39;ADP&#39;, &#39;adposition&#39;)
+(&#39;抜ける&#39;, &#39;抜ける&#39;, &#39;VERB&#39;, &#39;verb&#39;)
+(&#39;と&#39;, &#39;と&#39;, &#39;SCONJ&#39;, &#39;subordinating conjunction&#39;)
+(&#39;雪国&#39;, &#39;雪国&#39;, &#39;NOUN&#39;, &#39;noun&#39;)
+(&#39;で&#39;, &#39;だ&#39;, &#39;AUX&#39;, &#39;auxiliary&#39;)
+(&#39;あっ&#39;, &#39;ある&#39;, &#39;AUX&#39;, &#39;auxiliary&#39;)
+(&#39;た&#39;, &#39;た&#39;, &#39;AUX&#39;, &#39;auxiliary&#39;)
+(&#39;。&#39;, &#39;。&#39;, &#39;PUNCT&#39;, &#39;punctuation&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>ところで、前述のトークンの属性を眺めると lemma と lemma_ のようによく似た属性があることに気付くだろう。spaCy は記憶領域を圧縮するためにカテゴリー値を Hash 値で表現している。_ を含まない属性名はそのような Hash 値を表し、それに対応した _ で終わる属性は元の値を表す。
+たとえば、「雪国」のlemma について調べてみよう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">雪国</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s1">&#39;雪国&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="p">(</span><span class="n">雪国</span><span class="o">.</span><span class="n">lemma</span><span class="p">,</span> <span class="n">雪国</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">雪国</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">雪国</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7845350659413489886, &#39;雪国&#39;, 92, &#39;NOUN&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>このように <code class="docutils literal notranslate"><span class="pre">_</span></code> で終わる属性名を持つ属性が Hash 表現されたものと考えられるので、それらを列挙すると spaCy のだいたいの機能がわかると思う。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token_attrs</span> <span class="o">=</span> <span class="nb">dir</span><span class="p">(</span><span class="n">雪国</span><span class="p">)</span>
+<span class="n">NLP_ATTRS</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">attr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">token_attrs</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">([</span><span class="n">attr</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">token_attrs</span><span class="p">])])</span>
+<span class="n">NLP_ATTRS_</span> <span class="o">=</span> <span class="p">[</span><span class="n">attr</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">NLP_ATTRS</span><span class="p">]</span>
+<span class="n">Markdown</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">NLP_ATTRS</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p>dep, ent_id, ent_iob, ent_kb_id, ent_type, lang, lemma, lower, norm, orth, pos, prefix, shape, suffix, tag</p>
+</div>
+</div>
+<p>spaCy の <code class="docutils literal notranslate"><span class="pre">doc</span></code> を Pandas DataFrame に読み込むとアクセスが簡単なので、変換する。以下の例ではストップワードを除外している点に注意。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">)]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">is_stop</span><span class="p">],</span>
+                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;lemma&quot;</span><span class="p">,</span> <span class="s2">&quot;POS&quot;</span><span class="p">,</span> <span class="s2">&quot;explain&quot;</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-e51339e9-3349-4bb9-bcfa-6e04b49232b3">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>lemma</th>
+      <th>POS</th>
+      <th>explain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>国境</td>
+      <td>国境</td>
+      <td>NOUN</td>
+      <td>noun</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>長い</td>
+      <td>長い</td>
+      <td>ADJ</td>
+      <td>adjective</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>トンネル</td>
+      <td>トンネル</td>
+      <td>NOUN</td>
+      <td>noun</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>抜ける</td>
+      <td>抜ける</td>
+      <td>VERB</td>
+      <td>verb</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>雪国</td>
+      <td>雪国</td>
+      <td>NOUN</td>
+      <td>noun</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>。</td>
+      <td>。</td>
+      <td>PUNCT</td>
+      <td>punctuation</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-e51339e9-3349-4bb9-bcfa-6e04b49232b3')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-e51339e9-3349-4bb9-bcfa-6e04b49232b3 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-e51339e9-3349-4bb9-bcfa-6e04b49232b3');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id3">
+<h1>30. 形態素解析結果の読み込み<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>形態素解析結果（neko.txt.mecab）を読み込むプログラムを実装せよ．ただし，各形態素は表層形（surface），基本形（base），品詞（pos），品詞細分類1（pos1）をキーとするマッピング型に格納し，1文を形態素（マッピング型）のリストとして表現せよ．第4章の残りの問題では，ここで作ったプログラムを活用せよ．</p>
+</div></blockquote>
+<hr class="docutils" />
+<p>Mecab のかわりに spaCy を利用し、マッピング型ではなく Pandas DataFrame を利用することとする。</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mecab のデータ</p></th>
+<th class="head"><p>spaCy の属性</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>表層形（surface）</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>基本形（base）</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lemma</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>品詞（pos）</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POS</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>品詞細分類1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">???</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>ひとまずデータを読み込み、すべての属性を表示してみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">ent_id_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">ent_iob_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">ent_kb_id_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">ent_type_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">lang_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span>
+                    <span class="n">t</span><span class="o">.</span><span class="n">lower_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">norm_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">orth_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">prefix_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">shape_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">suffix_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">tag_</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">],</span>
+                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;dep, ent_id, ent_iob, ent_kb_id, ent_type, lang, lemma, lower, norm, orth, pos, prefix, shape, suffix, tag&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-204afe4a-06f5-4188-9486-01d34f83a98b">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+      <th>dep</th>
+      <th>ent_id</th>
+      <th>ent_iob</th>
+      <th>ent_kb_id</th>
+      <th>ent_type</th>
+      <th>lang</th>
+      <th>lemma</th>
+      <th>lower</th>
+      <th>norm</th>
+      <th>orth</th>
+      <th>pos</th>
+      <th>prefix</th>
+      <th>shape</th>
+      <th>suffix</th>
+      <th>tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>国境</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>国境</td>
+      <td>国境</td>
+      <td>国境</td>
+      <td>国境</td>
+      <td>NOUN</td>
+      <td>国</td>
+      <td>xx</td>
+      <td>国境</td>
+      <td>名詞-普通名詞-一般</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>の</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>の</td>
+      <td>の</td>
+      <td>の</td>
+      <td>の</td>
+      <td>ADP</td>
+      <td>の</td>
+      <td>x</td>
+      <td>の</td>
+      <td>助詞-格助詞</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>長い</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>長い</td>
+      <td>長い</td>
+      <td>長い</td>
+      <td>長い</td>
+      <td>ADJ</td>
+      <td>長</td>
+      <td>xx</td>
+      <td>長い</td>
+      <td>形容詞-一般</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>トンネル</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>トンネル</td>
+      <td>トンネル</td>
+      <td>トンネル</td>
+      <td>トンネル</td>
+      <td>NOUN</td>
+      <td>ト</td>
+      <td>xxxx</td>
+      <td>ンネル</td>
+      <td>名詞-普通名詞-サ変可能</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>を</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>を</td>
+      <td>を</td>
+      <td>を</td>
+      <td>を</td>
+      <td>ADP</td>
+      <td>を</td>
+      <td>x</td>
+      <td>を</td>
+      <td>助詞-格助詞</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>抜ける</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>抜ける</td>
+      <td>抜ける</td>
+      <td>抜ける</td>
+      <td>抜ける</td>
+      <td>VERB</td>
+      <td>抜</td>
+      <td>xxx</td>
+      <td>抜ける</td>
+      <td>動詞-非自立可能</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>と</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>と</td>
+      <td>と</td>
+      <td>と</td>
+      <td>と</td>
+      <td>SCONJ</td>
+      <td>と</td>
+      <td>x</td>
+      <td>と</td>
+      <td>助詞-接続助詞</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>雪国</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>雪国</td>
+      <td>雪国</td>
+      <td>雪国</td>
+      <td>雪国</td>
+      <td>NOUN</td>
+      <td>雪</td>
+      <td>xx</td>
+      <td>雪国</td>
+      <td>名詞-普通名詞-一般</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>で</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>だ</td>
+      <td>で</td>
+      <td>だ</td>
+      <td>で</td>
+      <td>AUX</td>
+      <td>で</td>
+      <td>x</td>
+      <td>で</td>
+      <td>助動詞</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>あっ</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>ある</td>
+      <td>あっ</td>
+      <td>有る</td>
+      <td>あっ</td>
+      <td>AUX</td>
+      <td>あ</td>
+      <td>xx</td>
+      <td>あっ</td>
+      <td>動詞-非自立可能</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>た</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>た</td>
+      <td>た</td>
+      <td>た</td>
+      <td>た</td>
+      <td>AUX</td>
+      <td>た</td>
+      <td>x</td>
+      <td>た</td>
+      <td>助動詞</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>。</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>ja</td>
+      <td>。</td>
+      <td>。</td>
+      <td>。</td>
+      <td>。</td>
+      <td>PUNCT</td>
+      <td>。</td>
+      <td>。</td>
+      <td>。</td>
+      <td>補助記号-句点</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-204afe4a-06f5-4188-9486-01d34f83a98b')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-204afe4a-06f5-4188-9486-01d34f83a98b button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-204afe4a-06f5-4188-9486-01d34f83a98b');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>先頭の方の5属性の値が空欄になっている。これは <code class="docutils literal notranslate"><span class="pre">spacy.blank(&quot;ja&quot;)</span></code> を利用していたため、該当する機能を不活化して spaCy を実行しているためかもしれない。（<code class="docutils literal notranslate"><span class="pre">spacy.black</span></code> について要調査）</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NEKO_COLUMNS</span> <span class="o">=</span> <span class="s1">&#39;sentence text norm POS tag&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">DATADIR</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;neko.txt&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()):</span>
+        <span class="n">sentences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">norm_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">tag_</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="n">line</span><span class="p">))))</span>
+    <span class="n">NEKO</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="p">[]),</span> <span class="n">columns</span><span class="o">=</span><span class="n">NEKO_COLUMNS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 冒頭の2文について表示してみる。</span>
+
+<span class="n">NEKO</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-0553b763-0685-45f1-ada8-75886b95939d">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sentence</th>
+      <th>text</th>
+      <th>norm</th>
+      <th>POS</th>
+      <th>tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>吾輩</td>
+      <td>我が輩</td>
+      <td>PRON</td>
+      <td>代名詞</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2</td>
+      <td>は</td>
+      <td>は</td>
+      <td>ADP</td>
+      <td>助詞-係助詞</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2</td>
+      <td>猫</td>
+      <td>猫</td>
+      <td>NOUN</td>
+      <td>名詞-普通名詞-一般</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2</td>
+      <td>で</td>
+      <td>だ</td>
+      <td>AUX</td>
+      <td>助動詞</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2</td>
+      <td>ある</td>
+      <td>有る</td>
+      <td>AUX</td>
+      <td>動詞-非自立可能</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2</td>
+      <td>。</td>
+      <td>。</td>
+      <td>PUNCT</td>
+      <td>補助記号-句点</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2</td>
+      <td>\n</td>
+      <td>\n</td>
+      <td>SPACE</td>
+      <td>空白</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>3</td>
+      <td>名前</td>
+      <td>名前</td>
+      <td>NOUN</td>
+      <td>名詞-普通名詞-一般</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>3</td>
+      <td>は</td>
+      <td>は</td>
+      <td>ADP</td>
+      <td>助詞-係助詞</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>3</td>
+      <td>まだ</td>
+      <td>未だ</td>
+      <td>ADV</td>
+      <td>副詞</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>3</td>
+      <td>無い</td>
+      <td>無い</td>
+      <td>ADJ</td>
+      <td>形容詞-非自立可能</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>3</td>
+      <td>。</td>
+      <td>。</td>
+      <td>PUNCT</td>
+      <td>補助記号-句点</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-0553b763-0685-45f1-ada8-75886b95939d')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-0553b763-0685-45f1-ada8-75886b95939d button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-0553b763-0685-45f1-ada8-75886b95939d');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>課題は dictionary を構成することを求めているが、Pandas DataFrame の方が便利そうなので、これを使い続けることにする。</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id4">
+<h1>31. 動詞<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>動詞の表層形をすべて抽出せよ．</p>
+</div></blockquote>
+<p>表層形は <code class="docutils literal notranslate"><span class="pre">text</span></code> 欄のこと。トークンが動詞か否かは品詞欄 (<code class="docutils literal notranslate"><span class="pre">POS</span></code>) で判定できる。</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id5">
+<h1>32. 動詞の基本形<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>動詞の基本形をすべて抽出せよ．</p>
+</div></blockquote>
+<p>Pandas のフィルタ操作の練習。動詞の基本形は <code class="docutils literal notranslate"><span class="pre">norm</span></code> 欄っぽい。</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="ab">
+<h1>33. 「AのB」<a class="headerlink" href="#ab" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>2つの名詞が「の」で連結されている名詞句を抽出せよ．</p>
+</div></blockquote>
+<p>spacy について</p>
+<ul class="simple">
+<li><p>品詞は <code class="docutils literal notranslate"><span class="pre">POS</span></code> 欄</p>
+<ul>
+<li><p>名詞は <code class="docutils literal notranslate"><span class="pre">NOUN</span></code></p></li>
+<li><p>助詞は <code class="docutils literal notranslate"><span class="pre">ADP</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>Pandas DataFrame <code class="docutils literal notranslate"><span class="pre">df</span></code> について</p>
+<ul class="simple">
+<li><p>インデックスは <code class="docutils literal notranslate"><span class="pre">df.index</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> 番目のデータを取得するには <code class="docutils literal notranslate"><span class="pre">df.iloc[i]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i1</span></code>番目から、<code class="docutils literal notranslate"><span class="pre">i2-1</span></code>番目の範囲のデータを取得するには <code class="docutils literal notranslate"><span class="pre">df.iloc[i1:i2]</span></code></p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id6">
+<h1>34. 名詞の連接<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>名詞の連接（連続して出現する名詞）を最長一致で抽出せよ．</p>
+</div></blockquote>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id7">
+<h1>35. 単語の出現頻度<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>文章中に出現する単語とその出現頻度を求め，出現頻度の高い順に並べよ．</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>出現頻度は単語をキー、出現頻度を値とする<a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#dict">辞書 - <code class="docutils literal notranslate"><span class="pre">dict()</span></code></a>を用いるとよい。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;a&#39;, 3), (&#39;b&#39;, 1), (&#39;c&#39;, 4)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id8">
+<h1>36. 頻度上位10語<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>出現頻度が高い10語とその出現頻度をグラフ（例えば棒グラフなど）で表示せよ．</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>頻度の順に並べるには<a class="reference external" href="https://docs.python.org/3.10/library/functions.html#sorted"><code class="docutils literal notranslate"><span class="pre">sorted</span></code>関数</a>を用いるが、辞書 <code class="docutils literal notranslate"><span class="pre">d</span></code> をソートするときは <code class="docutils literal notranslate"><span class="pre">d.items()</span></code> により辞書をキーと値の組のリストに変換すること。</p></li>
+<li><p>普通に <code class="docutils literal notranslate"><span class="pre">sorted(d.items())</span></code> を用いると、キーの辞書式順序に整列化するはず。値について整列化してもらうためには <code class="docutils literal notranslate"><span class="pre">sorted</span></code> 関数の <code class="docutils literal notranslate"><span class="pre">key=</span></code> 引数を用いて<code class="docutils literal notranslate"><span class="pre">sorted(d,</span> <span class="pre">key=lambda</span> <span class="pre">item:</span> <span class="pre">...)</span></code> のように使うとよい。</p></li>
+<li><p>出現頻度の高い順にするには <code class="docutils literal notranslate"><span class="pre">sorted</span></code> 関数の <code class="docutils literal notranslate"><span class="pre">reverse=</span></code> 引数を用いる。</p></li>
+<li><p>脇田は Plotly を用いて描画した。</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id9">
+<h1>37. 「猫」と共起頻度の高い上位10語<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>「猫」とよく共起する（共起頻度が高い）10語とその出現頻度をグラフ（例えば棒グラフなど）で表示せよ．</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>ふたつのトークンが同じ文のなかに出現するとき、この「ふたつのトークンは共起する」という</p></li>
+<li><p>あるトークンの「猫」との共起頻度とは、「猫」とそのトークンが共起する回数。ある「猫」を含む文のなかにそのトークンが二個以上出現したときに、共起回数を1回と勘定するか、出現したトークン数と勘定するかは微妙な問題。細かいことは気にせず、扱いやすい方の定義を採用すればよい。</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id10">
+<h1>38. ヒストグラム<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><blockquote>
+<div><p>単語の出現頻度のヒストグラムを描け．ただし，横軸は出現頻度を表し，1から単語の出現頻度の最大値までの線形目盛とする．縦軸はx軸で示される出現頻度となった単語の異なり数（種類数）である．</p>
+</div></blockquote>
+</div></blockquote>
+<p>つまりx回出現する単語が何種類あるかを表したグラフを表示すればよい。</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="zipf">
+<h1>39. Zipfの法則<a class="headerlink" href="#zipf" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%83%E3%83%97%E3%81%AE%E6%B3%95%E5%89%87">Zipfl/ジップの法則</a>は自然言語における単語の出現頻度についての非常に有名な経験則。出現頻度が k 番目に大きい要素が、1位のものの頻度と比較して \(1/k\) に比例する。このため両対数のスケールでは直線となる。</p>
+<ul class="simple">
+<li><p>描画にあたっては散布図を使うこと。</p></li>
+<li><p>最も順位の高いデータを 0 位にすると対数の計算で \(-\infty\) となってよくない。順位は高い順に \(0, 1, \ldots\) ではなく、\(1, 2, \ldots\) とすること</p></li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./nlp100"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="note03.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">第３章: 正規表現</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Ken Wakita<br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            <div><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 License</a>.</div>
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
